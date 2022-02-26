@@ -3,7 +3,7 @@
     <!-- Main content --> 
     <section class="content"> 
 
-      <!-- Default box -->
+      <!-- Default box --> 
       <div class="box">
         <div class="box-header with-border">
 
@@ -19,7 +19,7 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Nama Siswa</th>
+                  <th>Pengirim</th>
                   <th>Soal</th>
                   <th>Jenis</th>
                   <th>Nilai</th>
@@ -32,7 +32,7 @@
                 <?php foreach ($data as $key): ?>
                                   
                   <tr>
-                    <td><?php echo $key['user_name'] ?></td>
+                    <td><?= ($key['assigment_hasil_kelompok'] == '')?$key['user_name']:$key['kelompok_nama'] ?></td>
                     <td><?php echo $key['assigment_judul'] ?></td>
                     <td><?php echo $key['assigment_jenis'] ?></td>
                     <td><?php echo $key['assigment_hasil_nilai'] ?></td>
