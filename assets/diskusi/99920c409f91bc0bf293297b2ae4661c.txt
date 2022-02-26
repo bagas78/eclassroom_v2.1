@@ -1,0 +1,35 @@
+I  ..... a chef. (2);
+a. is;
+b. am;
+c. are;
+d. or;
+b. am;
+|
+You ..... a chef. (2);
+a. is;
+b. am;
+c. are;
+d. or;
+c. are;
+|
+They ..... a chef. (2);
+a. is;
+b. am;
+c. are;
+d. or;
+c. are;
+|
+Nia ..... in Surabaya. (2);
+a. is;
+b. or;
+c. am;
+d. are;
+a. is;
+|
+Rina dan Rini ..... beautiful. (2);
+a. is;
+b. am;
+c. or;
+d. are;
+d. are;
+|

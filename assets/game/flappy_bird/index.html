@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>   
+   <head>
+      <meta charset="utf-8">
+      <meta name="description" content="Divirtam-se com esse jogo viciante e desafiador."/>
+      <meta name="author" content="Léo B. Castro"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="robots" content="index, follow"/>
+
+      <link rel="icon" type="image/png" href="assets/icon.png"/>
+
+      <link rel="stylesheet" href="css/reset.css"/>
+      <link rel="stylesheet" href="css/style.min.css"/>
+
+      <title>Flappy Bird</title>
+   </head>
+<body style="background-color: black;">
+	<div id="background-pag">
+   		<main id="modal">
+      		<section id="game-area">          
+         		<section id="background-game" class="animated" style="background-image: url('assets/scenery/sky.png');">
+            		<section id="flight-area">
+               			<div id="ceiling" class="animated" style="background-image: url('assets/scenery/ceiling.png');"></div>
+               			<div id="player" class="personage animated"></div>  
+               			<div id="score"></div>
+               			<div id="splash-screen"></div>
+               			<div id="scoreboard">
+               			   <div id="medal"></div>
+                  			<div id="current-score"></div>
+                  			<div id="best-score"></div>
+                  			<div id="restart"><img src="assets/scenery/restart.png" alt="Restart"></div>
+               			</div>
+               			<!-- The obstacles will appear here by means of an array -->
+            		</section>
+         		</section>            
+         		<footer id="land" class="animated" style="background-image: url('assets/scenery/land.png');"></footer>
+      		</section>
+   		</main>
+	</div>
+   <!-- APIs and game logic -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <script src="js/libs/jquery.transit.min.js"></script>
+   <script src="js/libs/buzz.min.js"></script>
+   <script src="js/logic.min.js"></script>
+</body>
+</html>
