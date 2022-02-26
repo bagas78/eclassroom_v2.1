@@ -261,6 +261,7 @@ class Pilihan extends CI_Controller{
 
 			$kelas = $this->session->userdata('kelas');
 			$pelajaran = $this->session->userdata('pelajaran');
+			$id = $this->session->userdata('id');
 
 			switch ($this->session->userdata('level')) {
 				case '1':
@@ -275,7 +276,7 @@ class Pilihan extends CI_Controller{
 
 				case '3':
 					// siswa
-				$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND concat(',',b.pilihan_kelas,',') LIKE '%,$kelas,%'");
+				$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND a.pilihan_hasil_siswa = '$id' AND concat(',',b.pilihan_kelas,',') LIKE '%,$kelas,%'");
 					break;
 			}
 

@@ -16,7 +16,7 @@ class Assigment extends CI_Controller{
 			$kelas = $this->session->userdata('kelas');
 
 			switch ($level) {  
-				case 1:
+				case 1: 
 					// admin
 					$data['data'] = $this->query_builder->view("SELECT * FROM t_assigment as a JOIN t_pelajaran as b ON a.assigment_pelajaran = b.pelajaran_id WHERE a.assigment_hapus = 0");
 					break;
@@ -265,12 +265,12 @@ class Assigment extends CI_Controller{
 			switch ($this->session->userdata('level')) {
 				case '1':
 					// admin
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_assigment_hasil as a join t_assigment as b ON a.assigment_hasil_soal = b.assigment_id join t_user as c ON c.user_id = a.assigment_hasil_siswa WHERE a.assigment_hasil_hapus = 0");
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_assigment_hasil as a join t_assigment as b ON a.assigment_hasil_soal = b.assigment_id join t_user as c ON c.user_id = a.assigment_hasil_siswa LEFT JOIN t_kelompok as d ON a.assigment_hasil_kelompok = d.kelompok_id WHERE a.assigment_hasil_hapus = 0");
 					break;
 
 				case '2':
 					// guru
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_assigment_hasil as a join t_assigment as b ON a.assigment_hasil_soal = b.assigment_id join t_user as c ON c.user_id = a.assigment_hasil_siswa WHERE a.assigment_hasil_hapus = 0 AND b.assigment_pelajaran = '$pelajaran'");
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_assigment_hasil as a join t_assigment as b ON a.assigment_hasil_soal = b.assigment_id join t_user as c ON c.user_id = a.assigment_hasil_siswa LEFT JOIN t_kelompok as d ON a.assigment_hasil_kelompok = d.kelompok_id WHERE a.assigment_hasil_hapus = 0 AND b.assigment_pelajaran = '$pelajaran'");
 					break;
 
 				case '3':

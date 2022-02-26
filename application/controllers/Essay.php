@@ -226,6 +226,7 @@ class Essay extends CI_Controller{
 
 			$kelas = $this->session->userdata('kelas');
 			$pelajaran = $this->session->userdata('pelajaran');
+			$id = $this->session->userdata('id');
 
 			switch ($this->session->userdata('level')) {
 				case '1':
@@ -239,8 +240,8 @@ class Essay extends CI_Controller{
 					break;
 
 				case '3':
-					// siswa
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND concat(',',b.essay_kelas,',') LIKE '%,$kelas,%'");
+					// siswa 
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND a.essay_hasil_siswa = '$id' AND concat(',',b.essay_kelas,',') LIKE '%,$kelas,%'");
 					break;			
 			}
 
