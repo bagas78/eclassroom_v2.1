@@ -161,8 +161,8 @@ $(function () {
   //logout
   function logout(url){
       swal({
-        title: "Apa kamu yakin?",
-        text: "Keluar aplikasi ?",
+        title: "Yakin akan keluar",
+        text: "dari aplikasi ?",
         icon: "warning",
         buttons: true,
         dangerMode: true,

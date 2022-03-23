@@ -11,9 +11,9 @@
               <div class="inner">
                 <h3><?php echo $materi ?></h3>
 
-                <p>Materi</p>
+                <p>Materi</p> 
               </div>
-              <div class="icon">
+              <div class="icon"> 
                 <i style="font-size: inherit;" class="material-icons">book</i>
               </div>
             </div>
@@ -22,12 +22,12 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-         <a href="<?php echo base_url() ?>ujian">
+         <a href="<?php echo base_url() ?>assigment">
           <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
             <div class="inner">
-              <h3><?php echo $ujian; ?></h3>
+              <h3><?php echo $latihan; ?></h3>
 
-              <p>Ujian</p>
+              <p>Latihan</p>
             </div>
             <div class="icon">
               <i style="font-size: inherit;" class="material-icons">list_alt</i>
@@ -41,9 +41,9 @@
           <a href="<?php echo base_url() ?>ujian/hasil_view">
             <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
               <div class="inner">
-                <h3><?php echo $hasil; ?></h3>
+                <h3><?php echo $modul; ?></h3>
 
-                <p>Hasil Ujian</p>
+                <p>Modul</p>
               </div>
               <div class="icon">
                 <i style="font-size: inherit;" class="material-icons">library_books</i>
@@ -70,25 +70,94 @@
         <!-- ./col -->
       </div>
 
+        <div class="box">
+          <div class="box-header with-border">
 
-      <!-- AREA CHART -->
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">5 top siswa</h3>
+            <?php if ($this->session->userdata('level') < 3): ?>
+              <div align="left">
+                <button data-toggle="modal" data-target="#edit" class="btn btn-default"><i class="fa fa-edit"></i> Edit</button>
+              </div> 
+            <?php endif ?>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+            
+            <div class="col-md-12" style="background: ghostwhite; padding: 2%;">
+              <table class="table table-bordered">
+                <tr>
+                  <td>Nama Mata Kuliah</td>
+                  <td> : </td>
+                  <td><?php echo @$info['informasi_mata_kuliah'] ?></td>
+                </tr>
+                <tr>
+                  <td>Jumlah SKS</td>
+                  <td> : </td>
+                  <td><?php echo @$info['informasi_sks'] ?></td>
+                </tr>
+                <tr>
+                  <td>Deskripsi</td>
+                  <td> : </td>
+                  <td><?php echo @$info['informasi_deskripsi'] ?></td>
+                </tr>
+                <tr>
+                  <td>Relevansi</td>
+                  <td> : </td>
+                  <td><?php echo @$info['informasi_relevansi'] ?></td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+<div class="modal fade" id="edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Informasi Dashboard</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="post" action="<?php echo base_url() ?>dashboard/edit" enctype="multipart/form-data">
+            <div class="box-body">
+              <div class="form-group">
+                <label>Nama Mata Kuliah</label>
+                <input required="" type="text" name="informasi_mata_kuliah" class="form-control" value="<?php echo @$info['informasi_mata_kuliah'] ?>">
+              </div>
+              <div class="form-group">
+                <label>Jumlah SKS</label>
+                <input required="" type="text" name="informasi_sks" class="form-control" value="<?php echo @$info['informasi_sks'] ?>">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi</label>
+                <textarea required="" name="informasi_deskripsi" class="form-control"><?php echo @$info['informasi_deskripsi'] ?></textarea>
+              </div>
+              <div class="form-group">
+                <label>Relevansi</label>
+                <textarea required="" name="informasi_relevansi" class="form-control"><?php echo @$info['informasi_relevansi'] ?></textarea>
               </div>
             </div>
-            <div class="box-body">
-              
-              <div id="bar-chart" style="height: 300px;"></div>
-
-            </div>
             <!-- /.box-body -->
-          </div>
+
+            <div class="box-footer">
+              <button type="submit" class="btn btn-default">Submit <i class="fa fa-check"></i></button>
+               <button type="reset" class="btn btn-default">Reset <i class="fa fa-times"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
           <!-- ./wrapper -->
 <!-- jQuery 3 -->
@@ -154,43 +223,6 @@
 
 <script src="<?php echo base_url('assets/') ?>sweetalert/sweet-alert.js"></script>
 
-    <script type="text/javascript">
-     
-     /*
-     * BAR CHART
-     * ---------
-     */
-
-    var bar_data = {
-      data : [
-                <?php foreach ($peringkat as $key): ?>
-                ['<?php echo $key['nama'] ?>', <?php echo $key['nilai'] ?>],
-                <?php endforeach ?>
-             ],
-      color: '#afafaf'
-    }
-    $.plot('#bar-chart', [bar_data], {
-      grid  : {
-        borderWidth: 1,
-        borderColor: '#f3f3f3',
-        tickColor  : '#f3f3f3'
-      },
-      series: {
-        bars: {
-          show    : true,
-          barWidth: 0.5,
-          align   : 'center'
-        }
-      },
-      xaxis : {
-        mode      : 'categories',
-        tickLength: 0
-      }
-    })
-    /* END BAR CHART */
-
-</script>
-
 <script type="text/javascript">
     //swal("Demo aplikasi tidak bisa untuk INSERT, UPDATE, DELETE", "", "warning");
 
@@ -238,8 +270,8 @@
   //logout
   function logout(url){
       swal({
-        title: "Apa kamu yakin?",
-        text: "Keluar aplikasi ?",
+        title: "Yakin akan keluar",
+        text: "dari aplikasi ?",
         icon: "warning",
         buttons: true,
         dangerMode: true,

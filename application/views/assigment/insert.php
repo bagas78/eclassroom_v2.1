@@ -5,7 +5,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-
+ 
           <div align="left"> 
             <a href="<?php echo base_url('assigment') ?>"><button class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</button></a>
           </div>
@@ -19,10 +19,10 @@
         </div>
         <div class="box-body">
          
-          <form method="POST" action="<?php echo base_url('assigment/insert') ?>">
+          <form method="POST" action="<?php echo base_url('assigment/insert') ?>" enctype="multipart/form-data">
             <div class="row">
               <div class="form-group col-md-6">
-                <label>Judul</label>
+                <label>Materi</label>
                 <input required="" type="text" name="assigment_judul" value="" class="form-control">
               </div>
               <div class="form-group col-md-6">
@@ -55,13 +55,33 @@
                 </select>
               </div>
             </div>
+
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Tanggal</label>
+                <input required="" type="date" name="assigment_tampil" value="" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Batas Unggah</label>
+                <input required="" type="date" name="assigment_unggah" value="" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Jam</label>
+                <input required="" type="time" name="assigment_jam" value="" class="form-control">
+              </div>
+            </div>
+
             <div class="form-group">
               <textarea name="assigment_isi" id="editor1" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
             </div>
 
+            <div class="form-group">
+              <input type="file" name="file" class="form-control">
+            </div>
+
           <br/> 
           <button class="btn btn-default" type="submit"><i class="fa fa-check"></i> Simpan</button>
-          <a href="<?php echo base_url('materi') ?>"><button type="button" class="btn btn-default"><i class="fa fa-times"></i> Batal</button></a>
+          <a href="<?php echo base_url('assigment') ?>"><button type="button" class="btn btn-default"><i class="fa fa-times"></i> Batal</button></a>
 
           </form>
 

@@ -16,7 +16,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
-        </div>
+        </div> 
         <div class="box-body">
          
           <table id="example1" class="table table-bordered table-hover">
@@ -35,7 +35,7 @@
                   <tr>
                     <td><?php echo $key['kelompok_nama'] ?></td>
                     <td><?php echo $key['kelas_nama'] ?></td>
-                    <td><?php $str = str_replace(['[',']'], '', $key['kelompok_siswa']); $db = $this->db->query("SELECT user_name FROM t_user WHERE user_id IN($str)")->result_array(); foreach ($db as $val) {echo '<span class="badge">'.$val['user_name'].'</span> ';} ?></td>
+                    <td><?php $str = str_replace(['[',']'], '', $key['kelompok_siswa']); $db = $this->db->query("SELECT * FROM t_user WHERE user_id IN($str)")->result_array(); foreach ($db as $val) {echo '<span class="badge">'.$val['user_email'].' '.$val['user_name'].'</span> ';} ?></td>
                     <td style="width: 50px;">
                       <div>
                       <button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-edit<?php echo $key['kelompok_id'] ?>"><i class="fa fa-edit"></i></button>

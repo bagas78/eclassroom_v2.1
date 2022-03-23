@@ -7,9 +7,12 @@ class Essay extends CI_Controller{
 	function index(){ 
 		if ( $this->session->userdata('login') == 1) {
 		
-	  	$data['tugas_essay_active'] = 'class="active"';
-	  	$data['open_tugas'] = 'menu-open';
-	  	$data['block_tugas'] = 'style="display: block;"';
+		$data['open_menu_latihan'] = 'menu-open'; 
+		$data['block_menu_latihan'] = 'style="display: block;"';
+
+	  	$data['latihan_essay_active'] = 'class="active"';
+	  	$data['open_latihan'] = 'menu-open';
+	  	$data['block_latihan'] = 'style="display: block;"';
 
 		$level = $this->session->userdata('level');
 		$pelajaran = $this->session->userdata('pelajaran');
@@ -56,9 +59,12 @@ class Essay extends CI_Controller{
 			$idsoal = 'SOAL'.$i;
 		}
 
-		$data['tugas_essay_active'] = 'class="active"';
-		$data['open_tugas'] = 'menu-open';
-		$data['block_tugas'] = 'style="display: block;"';
+		$data['open_menu_latihan'] = 'menu-open';
+		$data['block_menu_latihan'] = 'style="display: block;"';
+
+		$data['latihan_essay_active'] = 'class="active"';
+		$data['open_latihan'] = 'menu-open';
+		$data['block_latihan'] = 'style="display: block;"';
 
 		$data['kelas_data'] = $this->query_builder->view("SELECT * FROM t_kelas WHERE kelas_hapus = 0");
 		$data['pelajaran_data'] = $this->query_builder->view("SELECT * FROM t_pelajaran WHERE pelajaran_hapus = 0");
@@ -121,9 +127,12 @@ class Essay extends CI_Controller{
 	}
 	function edit($id){
 
-		$data['tugas_essay_active'] = 'class="active"';
-		$data['open_tugas'] = 'menu-open';
-		$data['block_tugas'] = 'style="display: block;"';
+		$data['open_menu_latihan'] = 'menu-open';
+		$data['block_menu_latihan'] = 'style="display: block;"';
+
+		$data['latihan_essay_active'] = 'class="active"';
+		$data['open_latihan'] = 'menu-open';
+		$data['block_latihan'] = 'style="display: block;"';
 
 		$db = $this->query_builder->view_row("SELECT * FROM t_essay WHERE essay_id = '$id'");
 
@@ -182,9 +191,13 @@ class Essay extends CI_Controller{
 			redirect(base_url('essay'));
 		} else {
 			// belum
-			$data['tugas_essay_active'] = 'class="active"';
-			$data['open_tugas'] = 'menu-open';
-			$data['block_tugas'] = 'style="display: block;"';
+
+			$data['open_menu_latihan'] = 'menu-open';
+			$data['block_menu_latihan'] = 'style="display: block;"';
+
+			$data['latihan_essay_active'] = 'class="active"';
+			$data['open_latihan'] = 'menu-open';
+			$data['block_latihan'] = 'style="display: block;"';
 
 			$db = $this->query_builder->view_row("SELECT * FROM t_essay WHERE essay_id = '$id'");
 
@@ -228,26 +241,63 @@ class Essay extends CI_Controller{
 			$pelajaran = $this->session->userdata('pelajaran');
 			$id = $this->session->userdata('id');
 
-			switch ($this->session->userdata('level')) {
-				case '1':
-					// admin
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0");
-					break;
+			//filter
+			$filter_materi = @$_POST['materi'];
+			$filter_kelas = @$_POST['kelas'];
 
-				case '2':
-					// guru
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND b.essay_pelajaran = '$pelajaran'");
-					break;
+			if (@$filter_kelas) {
+				//dengan filter
+				switch ($this->session->userdata('level')) {
+					case '1':
+						// admin
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND b.essay_id = '$filter_materi' AND c.user_kelas = '$filter_kelas'");
+						break;
 
-				case '3':
-					// siswa 
-					$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND a.essay_hasil_siswa = '$id' AND concat(',',b.essay_kelas,',') LIKE '%,$kelas,%'");
-					break;			
+					case '2':
+						// guru
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND b.essay_pelajaran = '$pelajaran' AND b.essay_id = '$filter_materi' AND c.user_kelas = '$filter_kelas'");
+						break;	
+				}
+
+			}else{
+				//tanpa filter
+				switch ($this->session->userdata('level')) {
+					case '1':
+						// admin
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0");
+						break;
+
+					case '2':
+						// guru
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND b.essay_pelajaran = '$pelajaran'");
+						break;
+
+					case '3':
+						// siswa 
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_essay_hasil as a join t_essay as b ON a.essay_hasil_soal = b.essay_id join t_user as c ON c.user_id = a.essay_hasil_siswa WHERE a.essay_hasil_hapus = 0 AND a.essay_hasil_siswa = '$id' AND concat(',',b.essay_kelas,',') LIKE '%,$kelas,%'");
+						break;			
+				}
 			}
 
-		  $data['tugas_koreksi_essay_active'] = 'class="active"';
-		  $data['open_koreksi_tugas'] = 'menu-open';
-		  $data['block_koreksi_tugas'] = 'style="display: block;"';
+		  //materi
+		  switch ($this->session->userdata('level')) {
+		  	case '1':
+		  		$data['materi_data'] = $this->query_builder->view("SELECT * FROM t_essay WHERE essay_hapus = 0");
+		  		break;
+		  	case '2':
+		  		$data['materi_data'] = $this->query_builder->view("SELECT * FROM t_essay WHERE essay_hapus = 0 AND essay_pelajaran = '$pelajaran'");
+		  		break;
+		  	
+		  }
+
+		  $data['kelas_data'] = $this->query_builder->view("SELECT * FROM t_kelas WHERE kelas_hapus = 0");
+
+		  $data['open_menu_latihan'] = 'menu-open';
+		  $data['block_menu_latihan'] = 'style="display: block;"';
+
+		  $data['koreksi_essay_active'] = 'class="active"';
+		  $data['open_koreksi'] = 'menu-open';
+		  $data['block_koreksi'] = 'style="display: block;"';
 		  
 		  $data['title'] = 'Koreksi Essay';
 
@@ -277,9 +327,12 @@ class Essay extends CI_Controller{
 	function koreksi_detail($id){
 		if ( $this->session->userdata('login') == 1) {
 
-			$data['tugas_koreksi_essay_active'] = 'class="active"';
-			$data['open_koreksi_tugas'] = 'menu-open';
-			$data['block_koreksi_tugas'] = 'style="display: block;"';
+		  $data['open_menu_latihan'] = 'menu-open';
+		  $data['block_menu_latihan'] = 'style="display: block;"';
+
+		  $data['koreksi_essay_active'] = 'class="active"';
+		  $data['open_koreksi'] = 'menu-open';
+		  $data['block_koreksi'] = 'style="display: block;"';
 				
 			$data['title'] = 'Koreksi Assigment';
 
@@ -320,7 +373,7 @@ class Essay extends CI_Controller{
 				$this->load->view('essay/koreksi_detail');
 				$this->load->view('v_template_admin/admin_footer');
 			} else {
-				$this->session->set_flashdata('gagal', 'Tugas sudah di koreksi');
+				$this->session->set_flashdata('gagal', 'latihan sudah di koreksi');
 				redirect(base_url('essay/koreksi'));
 			}
 

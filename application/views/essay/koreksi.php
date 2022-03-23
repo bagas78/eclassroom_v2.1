@@ -7,6 +7,30 @@
       <div class="box">
         <div class="box-header with-border">
 
+          <?php if ($this->session->userdata('level') < 3): ?>
+            <form method="POST" action="">
+              <div class="col-md-4 col-xs-4 row">
+                <select required="" name="materi" class="form-control">
+                  <option value="" hidden="">-- Materi --</option>
+                  <?php foreach ($materi_data as $key): ?>
+                    <option value="<?php echo $key['essay_id'] ?>"><?php echo $key['essay_judul'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="col-md-3 col-xs-4">
+                <select required="" name="kelas" class="form-control">
+                  <option value="" hidden="">-- Kelas --</option>
+                  <?php foreach ($kelas_data as $key): ?>
+                    <option value="<?php echo $key['kelas_id'] ?>"><?php echo $key['kelas_nama'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="col-md-1 col-xs-1 row">
+                <button class="btn btn-danger" type="submit">Filter</button>
+              </div>
+            </form>
+          <?php endif ?>
+
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>

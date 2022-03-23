@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head> 
   <meta charset="utf-8"> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css"> 
   <!-- Font Awesome --> 
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons --> 
+  <!-- Ionicons -->  
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style --> 
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/dist/css/AdminLTE.css">
@@ -100,10 +100,24 @@
     padding: 5px 30px 5px 30px;
     border-radius: 50px;
  }
+ .title-app{
+  float: left;
+  line-height: 3.7;
+  color: white;
+  margin-left: 30px;
+ }
  @media (max-width: 767px) {
     .clock {
     left: 35vw;
+    }
+    .title-app{
+      display: none; 
+    }
   }
+
+.block{
+  margin-top: 1px;
+}
 
 </style>
 
@@ -118,6 +132,8 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
+      <span class="title-app">Collassion Learning - App </span>
 
       <span class="clock" id="clock"></span>
 
@@ -161,10 +177,10 @@
               echo 'Admin';
               break;
             case 2:
-              echo 'Guru';
+              echo 'Dosen';
               break;
             case 3:
-              echo 'Siswa';
+              echo 'Mahasiswa';
               break;
           } ?></a>
         </div>
@@ -279,65 +295,138 @@
           </a>
         </li>
 
-        <li class="treeview <?php echo @$open_tugas ?>">
+        <li class="treeview <?php echo @$open_menu_latihan ?>">
           <a href="#">
             <div class="col-md-1 col-xs-1"><i class="material-icons">chrome_reader_mode</i></div> 
-            <div class="col-md-5 col-xs-5"><span>Tugas</span></div>
+            <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" <?php echo @$block_tugas ?>>
-            <li <?php echo @$tugas_assigment_active; ?>>
+          <ul class="treeview-menu" <?php echo @$block_menu_latihan ?>>
+
+            <li class="treeview" <?php echo @$open_latihan ?>>
+              <a href="#">
+                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
+                <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu block" <?php echo @$block_latihan ?>>
+                <li <?php echo @$assigment_active; ?>>
+                  <a href="<?php echo base_url() ?>assigment">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Assigment</span>
+                  </a>
+                </li>
+                <li <?php echo @$latihan_essay_active; ?>>
+                  <a href="<?php echo base_url() ?>essay">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Essay</span>
+                  </a>
+                </li>
+                <li <?php echo @$latihan_pilihan_active; ?>>
+                  <a href="<?php echo base_url() ?>pilihan">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Pilihan Ganda</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="treeview <?php echo @$open_koreksi ?>">
+              <a href="#">
+                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
+                <div class="col-md-5 col-xs-5"><span>Koreksi Latihan</span></div>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span> 
+              </a>
+              <ul class="treeview-menu block" <?php echo @$block_koreksi ?>>
+                <li <?php echo @$koreksi_assigment_active; ?>>
+                  <a href="<?php echo base_url() ?>assigment/koreksi">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Assigment</span>
+                  </a>
+                </li>
+                <li <?php echo @$koreksi_essay_active; ?>>
+                  <a href="<?php echo base_url() ?>essay/koreksi">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Essay</span>
+                  </a>
+                </li>
+                <li <?php echo @$koreksi_pilihan_active; ?>>
+                  <a href="<?php echo base_url() ?>pilihan/koreksi">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Pilihan Ganda</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+        </li>
+
+        <!-- <li class="treeview <?php echo @$open_latihan ?>">
+          <a href="#">
+            <div class="col-md-1 col-xs-1"><i class="material-icons">chrome_reader_mode</i></div> 
+            <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" <?php echo @$block_latihan ?>>
+            <li <?php echo @$latihan_assigment_active; ?>>
               <a href="<?php echo base_url() ?>assigment">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Assigment</span>
               </a>
             </li>
-            <li <?php echo @$tugas_essay_active; ?>>
+            <li <?php echo @$latihan_essay_active; ?>>
               <a href="<?php echo base_url() ?>essay">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Essay</span>
               </a>
             </li>
-            <li <?php echo @$tugas_pilihan_active; ?>>
+            <li <?php echo @$latihan_pilihan_active; ?>>
               <a href="<?php echo base_url() ?>pilihan">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Pilihan Ganda</span>
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
 
-        <li class="treeview <?php echo @$open_koreksi_tugas ?>">
+        <!-- <li class="treeview <?php echo @$open_koreksi_latihan ?>">
           <a href="#">
             <div class="col-md-1 col-xs-1"><i class="material-icons">border_color</i></div> 
-            <div class="col-md-5 col-xs-5"><span><?=($this->session->userdata('level') < 3)?'Koreksi Tugas':'Hasil Tugas' ?></span></div>
+            <div class="col-md-5 col-xs-5"><span><?=($this->session->userdata('level') < 3)?'Koreksi latihan':'Hasil latihan' ?></span></div>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" <?php echo @$block_koreksi_tugas ?>>
-            <li <?php echo @$tugas_koreksi_assigment_active; ?>>
+          <ul class="treeview-menu" <?php echo @$block_koreksi_latihan ?>>
+            <li <?php echo @$latihan_koreksi_assigment_active; ?>>
               <a href="<?php echo base_url() ?>assigment/koreksi">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Assigment</span>
               </a>
             </li>
-            <li <?php echo @$tugas_koreksi_essay_active; ?>>
+            <li <?php echo @$latihan_koreksi_essay_active; ?>>
               <a href="<?php echo base_url() ?>essay/koreksi">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Essay</span>
               </a>
             </li>
-            <li <?php echo @$tugas_koreksi_pilihan_active; ?>>
+            <li <?php echo @$latihan_koreksi_pilihan_active; ?>>
               <a href="<?php echo base_url() ?>pilihan/koreksi">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Pilihan Ganda</span>
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         <li class="treeview <?php echo @$open_ujian ?>">
           <a href="#">
@@ -351,14 +440,37 @@
             <li <?php echo @$ujian_soal_active; ?>>
               <a href="<?php echo base_url() ?>ujian">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Soal Ujian</span>
+                <span class="multi-li">Essay</span>
               </a>
             </li>
-            <li <?php echo @$ujian_koreksi_active; ?>>
-              <a href="<?php echo base_url() ?>ujian/hasil_view">
+            <li <?php echo @$ujian_soal_active; ?>>
+              <a href="<?php echo base_url() ?>ujian">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Koreksi</span>
+                <span class="multi-li">Pilihan Ganda</span>
               </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
+                <div class="col-md-5 col-xs-5"><span>Nilai Ujian</span></div>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu block" <?php echo @$block_ujian ?>>
+                <li <?php echo @$ujian_soal_active; ?>>
+                  <a href="<?php echo base_url() ?>ujian/hasil_view">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Essay</span>
+                  </a>
+                </li>
+                <li <?php echo @$ujian_soal_active; ?>>
+                  <a href="<?php echo base_url() ?>ujian/hasil_view">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Pilihan Ganda</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
@@ -371,11 +483,11 @@
           </a>
         </li>
 
-        <li <?php echo @$hiburan; ?>>
+        <!-- <li <?php echo @$hiburan; ?>>
           <a href="<?php echo base_url() ?>hiburan">
             <div class="col-md-1 col-xs-1"><i class="material-icons">emoji_emotions</i></div> <div class="col-md-5 col-xs-5"><span>Hiburan</span></div>
           </a>
-        </li>
+        </li> -->
 
       </ul>
     </section>

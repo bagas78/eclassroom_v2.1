@@ -16,12 +16,30 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
-        </div>
+        </div> 
         <div class="box-body">
           
           <h3><?php echo $data['materi_judul']; ?></h3>
 
           <span><?php echo $data['materi_isi']; ?></span>
+
+          <br/>
+
+          <?php if ($data['materi_file'] != ''): ?>
+
+            <div style="background: #3c8dbc0d;padding: 2%;">
+              
+              <a href="<?php echo base_url('assets/materi/'.$data['materi_file']) ?>" download>
+
+              <span style="position: absolute; margin-top: 60px; margin-left: 12px;" class="badge">Click to download file</span>
+
+              <img class="img img-thumbnail" width="150" src="<?php echo base_url('assets/gambar/file.png') ?>">
+
+              </a>
+
+            </div>
+
+          <?php endif ?>
 
         </div>
       </div>

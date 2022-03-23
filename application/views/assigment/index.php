@@ -2,7 +2,7 @@
     <!-- Main content --> 
     <section class="content">
 
-      <!-- Default box --> 
+      <!-- Default box -->  
       <div class="box">
         <div class="box-header with-border">
         
@@ -24,9 +24,10 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Soal</th>
+                  <th>Soal Latihan</th>
                   <th>Jenis</th>
-                  <th>Pelajaran</th>
+                  <!-- <th>Pelajaran</th> -->
+                  <th>Kelas</th>
                   <th width="1">Action</th>
                 </tr>
                 </thead>
@@ -37,11 +38,12 @@
                   <tr>
                     <td><?php echo $key['assigment_judul'] ?></td>
                     <td><?php echo $key['assigment_jenis'] ?></td>
-                    <td><?php echo $key['pelajaran_nama'] ?></td>
+                    <!-- <td><?php echo $key['pelajaran_nama'] ?></td> -->
+                    <td><?php $str = str_replace(['[',']'], '', $key['assigment_kelas']); $db = $this->db->query("SELECT kelas_nama FROM t_kelas WHERE kelas_id IN($str)")->result_array(); foreach ($db as $val) {echo '<span class="badge">'.$val['kelas_nama'].'</span> ';} ?></td>
                     
                     <td style="width: 80px;">
                       <div>
-
+                        
                       <?php if ($this->session->userdata('level') > 2): ?>
                         <a href="<?php echo base_url('assigment/kerjakan/'.$key['assigment_id'].'/'.$key['assigment_jenis']) ?>"><button class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></button></a>
                       <?php else: ?>

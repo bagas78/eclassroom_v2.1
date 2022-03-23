@@ -5,7 +5,31 @@
 
       <!-- Default box --> 
       <div class="box">
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
+
+          <?php if ($this->session->userdata('level') < 3): ?>
+            <form method="POST" action="">
+              <div class="col-md-4 col-xs-4 row">
+                <select required="" name="materi" class="form-control">
+                  <option value="" hidden="">-- Materi --</option>
+                  <?php foreach ($materi_data as $key): ?>
+                    <option value="<?php echo $key['assigment_id'] ?>"><?php echo $key['assigment_judul'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="col-md-3 col-xs-4">
+                <select required="" name="kelas" class="form-control">
+                  <option value="" hidden="">-- Kelas --</option>
+                  <?php foreach ($kelas_data as $key): ?>
+                    <option value="<?php echo $key['kelas_id'] ?>"><?php echo $key['kelas_nama'] ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="col-md-1 col-xs-1 row">
+                <button class="btn btn-danger" type="submit">Filter</button>
+              </div>
+            </form>
+          <?php endif ?>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -19,11 +43,12 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Pengirim</th>
-                  <th>Soal</th>
-                  <th>Jenis</th>
-                  <th>Nilai</th>
-                  <th>Tanggal</th>
+                  <th>Materi</th>
+                  <th>Kelas</th>
+                  <th id="nama"></th>
+                  <!-- <th>Jenis</th> -->
+                  <th>Nilai Latihan</th>
+                  <!-- <th>Tanggal</th> -->
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -32,11 +57,27 @@
                 <?php foreach ($data as $key): ?>
                                   
                   <tr>
-                    <td><?= ($key['assigment_hasil_kelompok'] == '')?$key['user_name']:$key['kelompok_nama'] ?></td>
                     <td><?php echo $key['assigment_judul'] ?></td>
-                    <td><?php echo $key['assigment_jenis'] ?></td>
+                    <td><?php echo $key['kelas_nama'] ?></td>
+                    <td><?= ($key['assigment_hasil_kelompok'] == '')?$key['user_name']:$key['kelompok_nama'] ?></td>
+
+                    <?php if ($key['assigment_hasil_kelompok'] == ''): ?>
+                    
+                    <script type="text/javascript">
+                      $('#nama').text('Nama Pengirim');
+                    </script>
+
+                    <?php else: ?>
+
+                    <script type="text/javascript">
+                      $('#nama').text('Nama Kelompok');
+                    </script>
+
+                    <?php endif ?>
+
+                    <!-- <td><?php echo $key['assigment_jenis'] ?></td> -->
                     <td><?php echo $key['assigment_hasil_nilai'] ?></td>
-                    <td><?php echo $key['assigment_hasil_tanggal'] ?></td>
+                    <!-- <td><?php echo $key['assigment_hasil_tanggal'] ?></td> -->
                     <td style="width: 50px;">
                       <div style="width: 50px;">
 

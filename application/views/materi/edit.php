@@ -19,7 +19,7 @@
         </div>
         <div class="box-body">
          
-          <form method="POST" action="<?php echo base_url('materi/update/'.$data['materi_id']) ?>">
+          <form method="POST" action="<?php echo base_url('materi/update/'.$data['materi_id']) ?>" enctype="multipart/form-data">
             <div class="form-group">
               <label>Judul</label>
               <input required="" type="text" name="materi_judul" value="<?php echo $data['materi_judul'] ?>" class="form-control">
@@ -51,9 +51,27 @@
               </div>
             </div>             
             <div class="form-group">
-              <label>Isi Materi</label>
+              <label>Deskripsi Singkat</label>
               <textarea name="materi_isi" id="editor1" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $data['materi_isi'] ?></textarea>
             </div>
+
+            <div class="form-group">
+              <label>Unggah Materi</label>
+              <input type="file" name="file" class="form-control">
+              <small style="margin-top: 1%;" class="badge">doc | docx | pdf | txt | xlsx</small>
+            </div>
+
+            <?php if ($data['materi_file'] != ''): ?>
+              
+              <span style="border-width: 1px;border-style: dashed;padding: 0.2%;"><?php echo $data['materi_file']; ?></span> 
+
+              <a href="#" onclick="del_file('<?php echo $data['materi_id'] ?>','<?php echo $data['materi_file'] ?>')" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
+
+              <a href="<?php echo base_url('assets/materi/'.$data['materi_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
+
+            <?php endif ?>
+
+            <div class="clearfix"></div>
 
           <br/> 
           <button class="btn btn-default" type="submit"><i class="fa fa-check"></i> Simpan</button>
@@ -75,4 +93,24 @@
     });
 
   <?php endif ?>
+
+
+  function del_file(id,file){
+    $.ajax({
+      url: '<?php echo base_url('materi/unlink') ?>',
+      type: 'POST',
+      dataType: 'json',
+      data: {id: id, file: file},
+    })
+    .done(function(response) {
+      if (response == 1) {
+        location.reload();
+      }else{
+        alert('File gagal di hapus !!');
+      }
+
+    });
+    
+  }
+
 </script>

@@ -13,7 +13,7 @@ class Materi extends CI_Controller{
 		    $kelas = $this->session->userdata('kelas');
 
 		    switch ($level) { 
-		    	case 1:
+		    	case 1: 
 		    	//admin
 		    		$data['data'] = $this->query_builder->view("SELECT * FROM t_materi as a JOIN t_pelajaran as b ON a.materi_pelajaran = b.pelajaran_id WHERE materi_hapus = 0 order by a.materi_id DESC");
 		    		break;
@@ -51,21 +51,77 @@ class Materi extends CI_Controller{
 	}
 	function add(){ 
 
-		$set = array(
-						'materi_user' => $this->session->userdata('id'),
-						'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
-						'materi_judul' => $_POST['materi_judul'],
-						'materi_isi' => $_POST['materi_isi'],
-						'materi_tanggal' => date('Y-m-d'), 
-						'materi_pelajaran' => $_POST['materi_pelajaran'],
-					);
+		if (@$_FILES['file']['name']) {
 
-		$db = $this->query_builder->add('t_materi',$set);
+			//type file
+			$typefile = explode('/', $_FILES['file']['type']);
 
-		if ($db == 1) {
-			$this->session->set_flashdata('success','Berhasil di tambah');
+			//replace Karakter name foto
+			$filename = $_FILES['file']['name'];
+
+			//replace name foto
+			$type = explode(".", $filename);
+	    	$no = count($type) - 1;
+	    	$new_name = md5(time()).'.'.$type[$no];
+	    	/////////////////////
+			
+			// exist file
+			  $config = array(
+			  'upload_path' 	=> './assets/materi',
+			  'allowed_types' 	=> "doc|docx|pdf|txt|xlsx",
+			  'overwrite' 		=> TRUE,
+			  'max_size' 		=> "10000",
+			  'file_name'		=> $new_name,
+			  );
+
+	          //Load upload library
+	          $this->load->library('upload',$config);
+
+			if ($this->upload->do_upload('file')) {
+
+				//tanpa file
+				$set = array(
+								'materi_user' => $this->session->userdata('id'),
+								'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
+								'materi_judul' => $_POST['materi_judul'],
+								'materi_isi' => $_POST['materi_isi'],
+								'materi_tanggal' => date('Y-m-d'), 
+								'materi_pelajaran' => $_POST['materi_pelajaran'],
+								'materi_file' => $new_name,
+							);
+
+				$db = $this->query_builder->add('t_materi',$set);
+
+				if ($db == 1) {
+					$this->session->set_flashdata('success','Berhasil di tambah');
+				} else {
+					$this->session->set_flashdata('gagal','Gagal di tambah');
+				}
+			
+			}else{
+				$this->session->set_flashdata('gagal','Periksa kembali file');
+			}
+
 		} else {
-			$this->session->set_flashdata('gagal','Gagal di tambah');
+
+			//tanpa file
+			$set = array(
+							'materi_user' => $this->session->userdata('id'),
+							'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
+							'materi_judul' => $_POST['materi_judul'],
+							'materi_isi' => $_POST['materi_isi'],
+							'materi_tanggal' => date('Y-m-d'), 
+							'materi_pelajaran' => $_POST['materi_pelajaran'],
+						);
+
+			$db = $this->query_builder->add('t_materi',$set);
+
+			if ($db == 1) {
+				$this->session->set_flashdata('success','Berhasil di tambah');
+			} else {
+				$this->session->set_flashdata('gagal','Gagal di tambah');
+			}
+			
 		}
 		
 		redirect(base_url('materi'));
@@ -96,20 +152,76 @@ class Materi extends CI_Controller{
 	    $this->load->view('v_template_admin/admin_footer');
 	}
 	function update($id){
-		$set = array(
-						'materi_judul' => $_POST['materi_judul'],
-						'materi_isi' => $_POST['materi_isi'],
-						'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
-						'materi_pelajaran' => $_POST['materi_pelajaran'],
-					);
 
-		$where = ['materi_id' => $id];
-		$db = $this->query_builder->update('t_materi',$set,$where);
+		if (@$_FILES['file']['name']) {
 
-		if ($db == 1) {
-			$this->session->set_flashdata('success','Berhasil di simpan');
+			//type file
+			$typefile = explode('/', $_FILES['file']['type']);
+
+			//replace Karakter name foto
+			$filename = $_FILES['file']['name'];
+
+			//replace name foto
+			$type = explode(".", $filename);
+	    	$no = count($type) - 1;
+	    	$new_name = md5(time()).'.'.$type[$no];
+	    	/////////////////////
+			
+			// exist file
+			  $config = array(
+			  'upload_path' 	=> './assets/materi',
+			  'allowed_types' 	=> "doc|docx|pdf|txt|xlsx",
+			  'overwrite' 		=> TRUE,
+			  'max_size' 		=> "10000",
+			  'file_name'		=> $new_name,
+			  );
+
+	          //Load upload library
+	          $this->load->library('upload',$config);
+
+			if ($this->upload->do_upload('file')) {
+
+				//tanpa file
+				$set = array(
+								'materi_judul' => $_POST['materi_judul'],
+								'materi_isi' => $_POST['materi_isi'],
+								'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
+								'materi_pelajaran' => $_POST['materi_pelajaran'],
+								'materi_file' => $new_name,
+							);
+
+				$where = ['materi_id' => $id];
+				$db = $this->query_builder->update('t_materi',$set,$where);
+
+				if ($db == 1) {
+					$this->session->set_flashdata('success','Berhasil di simpan');
+				} else {
+					$this->session->set_flashdata('gagal','Gagal di simpan');
+				}
+			
+			}else{
+				$this->session->set_flashdata('gagal','Periksa kembali file');
+			}
+
 		} else {
-			$this->session->set_flashdata('gagal','Gagal di simpan');
+
+			//tanpa file
+			$set = array(
+							'materi_judul' => $_POST['materi_judul'],
+							'materi_isi' => $_POST['materi_isi'],
+							'materi_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['materi_kelas'])),
+							'materi_pelajaran' => $_POST['materi_pelajaran'],
+						);
+
+			$where = ['materi_id' => $id];
+			$db = $this->query_builder->update('t_materi',$set,$where);
+
+			if ($db == 1) {
+				$this->session->set_flashdata('success','Berhasil di simpan');
+			} else {
+				$this->session->set_flashdata('gagal','Gagal di simpan');
+			}	
+			
 		}
 
 		redirect(base_url('materi'));
@@ -122,5 +234,25 @@ class Materi extends CI_Controller{
 	    $this->load->view('v_template_admin/admin_header',$data);
 	    $this->load->view('materi/view');
 	    $this->load->view('v_template_admin/admin_footer');
+	}
+	function unlink(){
+
+		$id = $_POST['id'];
+		$file = $_POST['file'];
+
+		if (unlink('assets/materi/'.$file)) { 
+			$set = ['materi_file' => ''];
+			$where = ['materi_id' => $id];
+			$db = $this->query_builder->update('t_materi',$set,$where);
+
+			//berhasil
+		    $response = 1;
+		} 
+		else{ 
+		    //gagal 
+		    $response = 0;
+		}
+
+		echo json_encode($response);
 	}
 }

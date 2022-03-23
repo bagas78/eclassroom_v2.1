@@ -40,7 +40,7 @@
 
           <form method="POST" action="<?php echo base_url('assigment/koreksi_send/'.$data['assigment_hasil_id']) ?>">
             <div class="form-group">
-              <input required="" type="text" name="nilai" class="form-control" placeholder="Masukan Nilai">
+              <input required="" type="number" name="nilai" class="form-control" placeholder="Masukan Nilai">
             </div>
             <div class="form-group">
               <textarea class="form-control" name="catatan" placeholder="Tambah Catatan"></textarea>

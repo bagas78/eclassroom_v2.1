@@ -2,7 +2,7 @@
 class Dashboard extends CI_Controller{
 
 	function __construct(){
-		parent::__construct();
+		parent::__construct(); 
 	} 
 	function index(){
 		if ( $this->session->userdata('login') == 1) { 
@@ -15,18 +15,18 @@ class Dashboard extends CI_Controller{
 			switch ($level) {
 				case '1':
 					// admin
-					$num_materi = $this->query_builder->count("SELECT * FROM t_materi");
-					$num_ujian = $this->query_builder->count("SELECT * FROM t_ujian");
-					$num_hasil = $this->query_builder->count("SELECT * FROM t_hasil");
+					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_hapus = 0");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_hapus = 0");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil");
 					$num_video = $this->query_builder->count("SELECT * FROM t_video");
 
 					break;
 				
 				case '2':
 					// guru
-					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_pelajaran = '$ses_pelajaran'");
-					$num_ujian = $this->query_builder->count("SELECT * FROM t_ujian WHERE ujian_pelajaran = '$ses_pelajaran'");
-					$num_hasil = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE b.ujian_pelajaran = '$ses_pelajaran'");
+					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_pelajaran = '$ses_pelajaran' AND materi_hapus = 0");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_pelajaran = '$ses_pelajaran' AND assigment_hapus = 0");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE b.ujian_pelajaran = '$ses_pelajaran'");
 					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE a.album_pelajaran = '$ses_pelajaran'");
 
 					break;
@@ -34,19 +34,19 @@ class Dashboard extends CI_Controller{
 				case '3':
 					// siswa
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE FIND_IN_SET('$ses_kelas', materi_kelas)");
-					$num_ujian = $this->query_builder->count("SELECT * FROM t_ujian WHERE FIND_IN_SET('$ses_kelas', ujian_kelas)");
-					$num_hasil = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE FIND_IN_SET('$ses_kelas', b.ujian_kelas)");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE FIND_IN_SET('$ses_kelas', assigment_kelas) AND assigment_hapus = 0");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE FIND_IN_SET('$ses_kelas', b.ujian_kelas)");
 					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE FIND_IN_SET('$ses_kelas', a.album_kelas)");
 
 					break;
 			}
 
 			$data['materi'] = $num_materi;
-			$data['ujian'] = $num_ujian;
-			$data['hasil'] = $num_hasil;
+			$data['latihan'] = $num_latihan;
+			$data['modul'] = $num_modul;
 			$data['video'] = $num_video;
 
-			$data['peringkat'] = $this->query_builder->view("SELECT b.user_name AS nama, SUM(a.hasil_nilai) AS nilai FROM t_hasil AS a JOIN t_user AS b ON a.hasil_siswa = b.user_id GROUP BY a.hasil_siswa ORDER BY nilai DESC LIMIT 5");
+			$data['info'] = $this->query_builder->view_row("SELECT * FROM t_informasi");
 			
 			$data['dashboard'] = 'class="active"';
 		    $data['title'] = 'Dashboard';
@@ -58,4 +58,24 @@ class Dashboard extends CI_Controller{
 			redirect(base_url('login'));
 		}
 	} 
+	function edit(){
+		$set = array(
+						'informasi_user' => $this->session->userdata('id'),
+						'informasi_mata_kuliah' => $_POST['informasi_mata_kuliah'],
+						'informasi_sks' => $_POST['informasi_sks'],
+						'informasi_deskripsi' => $_POST['informasi_deskripsi'],
+						'informasi_relevansi' => $_POST['informasi_relevansi'], 
+					);
+
+		$where = ['informasi_id' => 1];
+		$db = $this->query_builder->update('t_informasi',$set,$where);
+
+		if ($db == 1) {
+			$this->session->set_flashdata('success','Data berhasil di edit');
+		} else {
+			$this->session->set_flashdata('gagal','Data gagal di edit');
+		}
+
+		redirect(base_url('dashboard'));
+	}
 }

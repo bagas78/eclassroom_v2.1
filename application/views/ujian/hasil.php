@@ -19,11 +19,13 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Nama Siswa</th>
-                  <th>Judul ujian</th>
-                  <th>Nilai</th>
-                  <th>Sisa Waktu</th>
-                  <th>Tanggal</th>
+                  <th>NIM</th>
+                  <th>Nama Mahasiswa</th>
+                  <th>Kelas</th>
+                  <!-- <th>Judul ujian</th> -->
+                  <th>Nilai Ujian</th> 
+                  <!-- <th>Sisa Waktu</th> -->
+                  <!-- <th>Tanggal</th> -->
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -32,11 +34,13 @@
                 <?php foreach ($data as $key): ?>
                                   
                   <tr>
+                    <td><?php echo $key['user_nim'] ?></td>
                     <td><?php echo $key['user_name'] ?></td>
-                    <td><?php echo $key['ujian_judul'] ?></td>
+                    <td><?php echo $key['kelas_nama'] ?></td>
+                    <!-- <td><?php echo $key['ujian_judul'] ?></td> -->
                     <td><?php echo $key['hasil_nilai'] ?></td>
-                    <td><?php echo $key['hasil_sisa'] ?></td>
-                    <td><?php echo $key['hasil_tanggal'] ?></td>
+                    <!-- <td><?php echo $key['hasil_sisa'] ?></td>
+                    <td><?php echo $key['hasil_tanggal'] ?></td> -->
                     <td style="width: 50px;">
                       <div style="width: 50px;">
 

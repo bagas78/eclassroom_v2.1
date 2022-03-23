@@ -7,12 +7,12 @@
     padding: 1%;
     border-color: #d2d6de;
   }
-</style>
+</style> 
 
 
     <!-- Main content --> 
     <section class="content">
-
+ 
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
@@ -32,6 +32,26 @@
           <div id="box" class="form-group">
             <span><?php echo $data['assigment_isi'] ?></span>
           </div>
+
+          <?php if ($data['assigment_file'] != ''): ?>
+
+            <div>
+              
+              <a href="<?php echo base_url('assets/assigment/'.$data['assigment_file']) ?>" download>
+
+              <span style="position: absolute; margin-top: 60px; margin-left: 10px; font-size: 10px;" class="badge">Click download</span>
+
+              <img class="img img-thumbnail" width="100" src="<?php echo base_url('assets/gambar/file.png') ?>">
+
+              </a>
+
+            </div>
+
+          <?php endif ?>
+
+          <div class="clearfix"></div>
+
+          <br/>
 
           <form method="POST" action="<?php echo base_url('assigment/kerjakan_send') ?>" enctype="multipart/form-data">
             

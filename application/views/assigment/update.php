@@ -4,7 +4,7 @@
 
       <!-- Default box -->
       <div class="box">
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
 
           <div align="left"> 
             <a href="<?php echo base_url('assigment') ?>"><button class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</button></a>
@@ -19,10 +19,10 @@
         </div>
         <div class="box-body">
          
-          <form method="POST" action="<?php echo base_url('assigment/update/'.$data['assigment_id']) ?>">
+          <form method="POST" action="<?php echo base_url('assigment/update/'.$data['assigment_id']) ?>" enctype="multipart/form-data">
             <div class="row">
               <div class="form-group col-md-6">
-                <label>Judul</label>
+                <label>Materi</label>
                 <input required="" type="text" name="assigment_judul" value="<?php echo $data['assigment_judul'] ?>" class="form-control">
               </div>
               <div class="form-group col-md-6">
@@ -69,13 +69,45 @@
 
               </div>
             </div>
+
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Tanggal</label>
+                <input required="" type="date" name="assigment_tampil" class="form-control" value="<?php echo $data['assigment_tampil'] ?>">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Batas Unggah</label>
+                <input required="" type="date" name="assigment_unggah" class="form-control" value="<?php echo $data['assigment_unggah']; ?>">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Jam</label>
+                <input required="" type="time" name="assigment_jam" class="form-control" value="<?php echo $data['assigment_jam']; ?>">
+              </div>
+            </div>
+
             <div class="form-group">
               <textarea name="assigment_isi" id="editor1" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $data['assigment_isi'] ?></textarea>
             </div>
 
+            <div class="form-group">
+              <input type="file" name="file" class="form-control">
+            </div>
+
+            <?php if ($data['assigment_file'] != ''): ?>
+              
+              <span style="border-width: 1px;border-style: dashed;padding: 0.2%;"><?php echo $data['assigment_file']; ?></span> 
+
+              <a href="#" onclick="del_file('<?php echo $data['assigment_id'] ?>','<?php echo $data['assigment_file'] ?>')" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
+
+              <a href="<?php echo base_url('assets/assigment/'.$data['assigment_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
+
+            <?php endif ?>
+
+            <div class="clearfix"></div>
+
           <br/> 
           <button class="btn btn-default" type="submit"><i class="fa fa-check"></i> Simpan</button>
-          <a href="<?php echo base_url('materi') ?>"><button type="button" class="btn btn-default"><i class="fa fa-times"></i> Batal</button></a>
+          <a href="<?php echo base_url('assigment') ?>"><button type="button" class="btn btn-default"><i class="fa fa-times"></i> Batal</button></a>
 
           </form>
 
@@ -94,4 +126,22 @@
     });
 
   <?php endif ?>
+
+  function del_file(id,file){
+    $.ajax({
+      url: '<?php echo base_url('assigment/unlink') ?>',
+      type: 'POST',
+      dataType: 'json',
+      data: {id: id, file: file},
+    })
+    .done(function(response) {
+      if (response == 1) {
+        location.reload();
+      }else{
+        alert('File gagal di hapus !!');
+      }
+
+    });
+    
+  }
 </script>

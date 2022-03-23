@@ -16,10 +16,10 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div> 
-        </div>
+        </div> 
         <div class="box-body">
          
-          <form method="POST" action="<?php echo base_url('materi/add') ?>">
+          <form method="POST" action="<?php echo base_url('materi/add') ?>" enctype="multipart/form-data">
             <div class="form-group">
               <label>Judul</label>
               <input required="" type="text" name="materi_judul" value="" class="form-control">
@@ -34,7 +34,7 @@
                     <option value="<?php echo $pelajaran['pelajaran_id'] ?>"><?php echo $pelajaran['pelajaran_nama'] ?></option>
                   <?php endforeach ?>
                 </select>
-              </div>
+              </div> 
               <div class="form-group col-md-6">
                 <label>Kelas</label>
                 <select name="materi_kelas[]" class="form-control select2" multiple="multiple" data-placeholder="-- Pilih --"
@@ -46,7 +46,13 @@
               </div>
             </div>
             <div class="form-group">
+              <label>Deskripsi Singkat</label>
               <textarea name="materi_isi" id="editor1" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="file" name="file" class="form-control">
+              <small style="margin-top: 1%;" class="badge">doc | docx | pdf | txt | xlsx</small>
             </div>
 
           <br/> 

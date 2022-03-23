@@ -3,13 +3,16 @@ class Pilihan extends CI_Controller{
 
 	function __construct(){ 
 		parent::__construct(); 
-	}  
+	}   
 	function index(){ 
 		if ( $this->session->userdata('login') == 1) { 
 		
-			$data['tugas_pilihan_active'] = 'class="active"';
-	  		$data['open_tugas'] = 'menu-open';
-	  		$data['block_tugas'] = 'style="display: block;"';
+			$data['open_menu_latihan'] = 'menu-open';
+		  $data['block_menu_latihan'] = 'style="display: block;"';
+			
+			$data['latihan_pilihan_active'] = 'class="active"';
+	  	$data['open_latihan'] = 'menu-open';
+	  	$data['block_latihan'] = 'style="display: block;"';
 
 			$level = $this->session->userdata('level');
 			$pelajaran = $this->session->userdata('pelajaran');
@@ -44,9 +47,12 @@ class Pilihan extends CI_Controller{
 		}
 	} 
 	function add(){
-		$data['tugas_pilihan_active'] = 'class="active"';
-	  	$data['open_tugas'] = 'menu-open';
-	  	$data['block_tugas'] = 'style="display: block;"';
+		$data['open_menu_latihan'] = 'menu-open';
+		$data['block_menu_latihan'] = 'style="display: block;"';
+
+		$data['latihan_pilihan_active'] = 'class="active"';
+	  $data['open_latihan'] = 'menu-open';
+	  $data['block_latihan'] = 'style="display: block;"';
 
 		$data['title'] = 'Pilihan Ganda';
 
@@ -112,9 +118,13 @@ class Pilihan extends CI_Controller{
 		redirect(base_url('pilihan'));
 	}
 	function edit($id){
-		$data['tugas_pilihan_active'] = 'class="active"';
-	  $data['open_tugas'] = 'menu-open';
-	  $data['block_tugas'] = 'style="display: block;"';
+
+		$data['open_menu_latihan'] = 'menu-open';
+		$data['block_menu_latihan'] = 'style="display: block;"';
+
+		$data['latihan_pilihan_active'] = 'class="active"';
+	  $data['open_latihan'] = 'menu-open';
+	  $data['block_latihan'] = 'style="display: block;"';
 		
 		$data['title'] = 'ujian';
 		$db = $this->query_builder->view_row("SELECT * FROM t_pilihan WHERE pilihan_id = '$id'");
@@ -193,9 +203,9 @@ class Pilihan extends CI_Controller{
 
 		}else{
 
-			$data['tugas_pilihan_active'] = 'class="active"';
-	  	$data['open_tugas'] = 'menu-open';
-	  	$data['block_tugas'] = 'style="display: block;"';
+			$data['latihan_pilihan_active'] = 'class="active"';
+	  	$data['open_latihan'] = 'menu-open';
+	  	$data['block_latihan'] = 'style="display: block;"';
 
 			$db = $this->query_builder->view_row("SELECT * FROM t_pilihan WHERE pilihan_id = '$id'");
 			$set = array(	
@@ -263,27 +273,66 @@ class Pilihan extends CI_Controller{
 			$pelajaran = $this->session->userdata('pelajaran');
 			$id = $this->session->userdata('id');
 
-			switch ($this->session->userdata('level')) {
-				case '1':
-					// admin
-				$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0");
-					break;
-				
-				case '2':
-					// guru
-				$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND b.pilihan_pelajaran = '$pelajaran'");
-					break;
+			//filter
+			$filter_materi = @$_POST['materi'];
+			$filter_kelas = @$_POST['kelas'];
 
-				case '3':
-					// siswa
-				$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND a.pilihan_hasil_siswa = '$id' AND concat(',',b.pilihan_kelas,',') LIKE '%,$kelas,%'");
-					break;
+			if (@$filter_kelas) {
+				//dengan filter
+				switch ($this->session->userdata('level')) {
+					case '1':
+						// admin
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND b.pilihan_id = '$filter_materi' AND c.user_kelas = '$filter_kelas'");
+						break;
+					
+					case '2':
+						// guru
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND b.pilihan_pelajaran = '$pelajaran' AND b.pilihan_id = '$filter_materi' AND c.user_kelas = '$filter_kelas'");
+						break;
+				}
+				
+
+			}else{
+				//tanpa filter
+				switch ($this->session->userdata('level')) {
+					case '1':
+						// admin
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0");
+						break;
+					
+					case '2':
+						// guru
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND b.pilihan_pelajaran = '$pelajaran'");
+						break;
+
+					case '3':
+						// siswa
+					$data['data'] = $this->query_builder->view("SELECT * FROM t_pilihan_hasil as a join t_pilihan as b ON a.pilihan_hasil_soal = b.pilihan_id join t_user as c ON c.user_id = a.pilihan_hasil_siswa WHERE a.pilihan_hasil_hapus = 0 AND a.pilihan_hasil_siswa = '$id' AND concat(',',b.pilihan_kelas,',') LIKE '%,$kelas,%'");
+						break;
+				}
+				
 			}
 
-		  $data['tugas_koreksi_pilihan_active'] = 'class="active"';
-		  $data['open_koreksi_tugas'] = 'menu-open';
-		  $data['block_koreksi_tugas'] = 'style="display: block;"';
-		  
+			//materi
+		  switch ($this->session->userdata('level')) {
+		  	case '1':
+		  		$data['materi_data'] = $this->query_builder->view("SELECT * FROM t_pilihan WHERE pilihan_hapus = 0");
+		  		break;
+		  	case '2':
+		  		$data['materi_data'] = $this->query_builder->view("SELECT * FROM t_pilihan WHERE pilihan_hapus = 0 AND pilihan_pelajaran = '$pelajaran'");
+		  		break;
+		  	
+		  }
+
+		  $data['kelas_data'] = $this->query_builder->view("SELECT * FROM t_kelas WHERE kelas_hapus = 0");
+
+			$data['open_menu_latihan'] = 'menu-open';
+		  $data['block_menu_latihan'] = 'style="display: block;"';
+
+		  $data['koreksi_pilihan_active'] = 'class="active"';
+		  $data['open_koreksi'] = 'menu-open';
+		  $data['block_koreksi'] = 'style="display: block;"';
+
 		  $data['title'] = 'Koreksi Pilihan Ganda';
 
 		  $this->load->view('v_template_admin/admin_header',$data);
@@ -316,9 +365,12 @@ class Pilihan extends CI_Controller{
 			$v = str_replace(',"soal_pertanyaan', '},{"soal_pertanyaan', $soal);
 			$data['soal'] = json_decode($v,true);
 
-			$data['tugas_koreksi_pilihan_active'] = 'class="active"';
-		  $data['open_koreksi_tugas'] = 'menu-open';
-		  $data['block_koreksi_tugas'] = 'style="display: block;"';
+			$data['open_menu_latihan'] = 'menu-open';
+		  $data['block_menu_latihan'] = 'style="display: block;"';
+
+		  $data['koreksi_pilihan_active'] = 'class="active"';
+		  $data['open_koreksi'] = 'menu-open';
+		  $data['block_koreksi'] = 'style="display: block;"';
 			
 		  $data['title'] = 'Koreksi Pilihan Ganda';
 

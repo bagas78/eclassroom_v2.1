@@ -266,7 +266,7 @@ class Ujian extends CI_Controller{
 	}
 	function hasil_view(){
 		if ( $this->session->userdata('login') == 1) {
-			$data['data'] = $this->query_builder->view("SELECT * FROM t_hasil as a join t_ujian as b ON a.hasil_soal = b.ujian_id join t_user as c ON c.user_id = a.hasil_siswa WHERE a.hasil_hapus = 0");
+			$data['data'] = $this->query_builder->view("SELECT * FROM t_hasil as a join t_ujian as b ON a.hasil_soal = b.ujian_id join t_user as c ON c.user_id = a.hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.hasil_hapus = 0");
 
 			$data['ujian_koreksi_active'] = 'class="active"';
 			$data['open_ujian'] = 'menu-open';

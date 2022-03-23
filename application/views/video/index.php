@@ -11,7 +11,7 @@
             <div align="left">
               <button class="btn btn-default" data-toggle="modal" data-target="#modal-album"><i class="fa fa-plus"></i> Playlist</button>
             </div>
-          <?php endif ?>
+          <?php endif ?> 
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -25,9 +25,9 @@
          <table id="example1" class="table table-bordered table-hover">
           <thead>
             <tr>
-              <th>Playlist</th>
+              <th>Materi</th>
               <th>Jumlah Video</th>
-              <th>Pelajaran</th>
+              <!-- <th>Pelajaran</th> -->
               <th>Kelas</th>
               <th>Action</th>
             </tr>
@@ -42,7 +42,7 @@
                 $jum = $this->db->query("SELECT count(video_judul) as jum_video FROM t_video WHERE video_album = '$album'")->result_array(); ?>
                 <?php echo $jum[0]['jum_video']; ?>
               </td>
-              <td><?php echo $key['pelajaran_nama'] ?></td>
+              <!-- <td><?php echo $key['pelajaran_nama'] ?></td> -->
               <td><?php $str = str_replace(['[',']'], '', $key['album_kelas']); $db = $this->db->query("SELECT kelas_nama FROM t_kelas WHERE kelas_id IN($str)")->result_array(); foreach ($db as $val) {echo '<span class="badge">'.$val['kelas_nama'].'</span> ';} ?></td>
               <td width="80">
                 
@@ -74,7 +74,7 @@
                       <form role="form" method="post" action="<?php echo base_url() ?>video/album_edit/<?php echo $key['album_id'] ?>" enctype="multipart/form-data">
                         <div class="box-body">
                           <div class="form-group">
-                            <label>Playlist name</label>
+                            <label>Materi</label>
                             <input type="text" name="album_name" class="form-control" required="" value="<?php echo $key['album_name'] ?>">
                           </div>
                           <div class="form-group"> 
@@ -138,7 +138,7 @@
           <form role="form" method="post" action="<?php echo base_url() ?>video/album" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
-                <label>Playlist name</label>
+                <label>Materi</label>
                 <input type="text" name="album_name" class="form-control" required="">
               </div>
               <div class="form-group"> 
