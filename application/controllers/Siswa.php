@@ -17,7 +17,7 @@ class Siswa extends CI_Controller{
 		    $this->load->view('siswa/index');
 		    $this->load->view('v_template_admin/admin_footer');
 
-		}
+		} 
 		else{
 			redirect(base_url('login'));
 		}
@@ -38,6 +38,7 @@ class Siswa extends CI_Controller{
 							'user_tanggal'	=> date('Y-m-d'),
 							'user_level'	=> 3, 
 							'user_kelas' => $_POST['kelas'],
+							'user_email_2' => $_POST['email2'],
 						);
 			$db = $this->query_builder->add('t_user',$set);
 
@@ -71,6 +72,7 @@ class Siswa extends CI_Controller{
 						'user_email' => $email, 
 						'user_password' => md5($email),
 						'user_kelas' => $_POST['kelas'],
+						'user_email_2' => $_POST['email2'],
 					);
 		
 		$where = ['user_id' => $id];

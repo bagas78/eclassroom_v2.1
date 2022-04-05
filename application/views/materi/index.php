@@ -3,7 +3,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box"> 
         <div class="box-header with-border">
 
           <?php if ($this->session->userdata('level') < 3): ?>
@@ -24,7 +24,7 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Materi</th>
+                  <th>Judul</th>
                  <!--  <th>Pelajaran</th> -->
                   <th>Kelas</th>
                   <th width="1">Action</th>

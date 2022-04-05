@@ -137,6 +137,7 @@
             <div class="input-group">
               <input id="type" type="hidden" name="type" value="<?php echo @$type ?>">
               <input id="where" type="hidden" name="where" value="<?php echo @$where ?>">
+              <input id="kelas" type="hidden" name="kelas" value="<?php echo @$kelas ?>">
 
               <input id="text" required="" type="text" name="text" placeholder="Type Message ..." class="form-control">
               <span class="input-group-btn">

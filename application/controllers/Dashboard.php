@@ -12,13 +12,13 @@ class Dashboard extends CI_Controller{
 			$ses_pelajaran = $this->session->userdata('pelajaran');
 			$ses_kelas = $this->session->userdata('kelas');
 
-			switch ($level) {
+			switch ($level) { 
 				case '1':
 					// admin
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_hapus = 0");
 					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_hapus = 0");
-					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil");
-					$num_video = $this->query_builder->count("SELECT * FROM t_video");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE modul_hapus = 0");
+					$num_video = $this->query_builder->count("SELECT * FROM t_video WHERE video_hapus = 0");
 
 					break;
 				
@@ -26,8 +26,8 @@ class Dashboard extends CI_Controller{
 					// guru
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_pelajaran = '$ses_pelajaran' AND materi_hapus = 0");
 					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_pelajaran = '$ses_pelajaran' AND assigment_hapus = 0");
-					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE b.ujian_pelajaran = '$ses_pelajaran'");
-					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE a.album_pelajaran = '$ses_pelajaran'");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE modul_pelajaran = '$ses_pelajaran' AND modul_hapus = 0");
+					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE a.album_pelajaran = '$ses_pelajaran' AND b.video_hapus = 0");
 
 					break;
 
@@ -35,8 +35,8 @@ class Dashboard extends CI_Controller{
 					// siswa
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE FIND_IN_SET('$ses_kelas', materi_kelas)");
 					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE FIND_IN_SET('$ses_kelas', assigment_kelas) AND assigment_hapus = 0");
-					$num_modul = $this->query_builder->count("SELECT * FROM t_hasil AS a JOIN t_ujian AS b ON a.hasil_soal = b.ujian_id WHERE FIND_IN_SET('$ses_kelas', b.ujian_kelas)");
-					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE FIND_IN_SET('$ses_kelas', a.album_kelas)");
+					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE FIND_IN_SET('$ses_kelas', modul_kelas) AND modul_hapus = 0");
+					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE FIND_IN_SET('$ses_kelas', a.album_kelas) AND video_hapus = 0");
 
 					break;
 			}
@@ -71,7 +71,7 @@ class Dashboard extends CI_Controller{
 		$db = $this->query_builder->update('t_informasi',$set,$where);
 
 		if ($db == 1) {
-			$this->session->set_flashdata('success','Data berhasil di edit');
+			$this->session->set_flashdata('success','Data berujian_pilihan_hasil di edit');
 		} else {
 			$this->session->set_flashdata('gagal','Data gagal di edit');
 		}

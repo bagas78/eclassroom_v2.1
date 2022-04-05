@@ -4,9 +4,9 @@ class Materi extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 	} 
-	function index(){
+	function index(){ 
 		if ( $this->session->userdata('login') == 1) {
-			$data['materi'] = 'class="active"';
+			$data['materi'] = 'class="active"'; 
 		    $data['title'] = 'Materi';
 		    $level = $this->session->userdata('level');
 		    $pelajaran = $this->session->userdata('pelajaran');

@@ -79,6 +79,10 @@
                                   $('#kelas<?php echo $key['user_id'] ?>').val('<?php echo $key['user_kelas'] ?>').change();
                                 </script>
                               </div>
+                              <div class="form-group">
+                                <label>Email</label>
+                                <input required="" type="email" name="email2" class="form-control" placeholder="Email" value="<?php echo $key['user_email_2'] ?>">
+                              </div>
                               
                             </div>
 
@@ -123,6 +127,10 @@
                               <div class="form-group">
                                 <label>No. HP</label>
                                 <input readonly="" type="number" class="form-control" value="<?php echo $key['user_nohp'] ?>" placeholder="Belum di isi">
+                              </div>
+                              <div class="form-group">
+                                <label>Email</label>
+                                <input readonly="" type="email" class="form-control" value="<?php echo $key['user_email_2'] ?>" placeholder="Belum di isi">
                               </div>
                               <div class="form-group">
                                 <label>Alamat</label>
@@ -182,6 +190,10 @@
                           <option value="<?php echo @$key['kelas_id'] ?>"><?php echo @$key['kelas_nama'] ?></option>
                         <?php endforeach ?>
                       </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input required="" type="email" name="email2" class="form-control" placeholder="Email">
                     </div>
                   </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> 
+<html>  
 <head> 
   <meta charset="utf-8"> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +8,12 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 --> 
-  <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">  
   <!-- Font Awesome --> 
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->  
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style --> 
+  <!-- Theme style -->  
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins 
        folder instead of downloading all of them to reduce the load. -->
@@ -197,6 +197,47 @@
           </a>
         </li>
 
+        <?php if ($this->session->userdata('level') > 1): ?>
+
+        <li class="treeview <?php echo @$tujuan ?>">
+            <a href="#">
+              <div class="col-md-1 col-xs-1"><i class="material-icons">assignment_turned_in</i></div> 
+              <div class="col-md-5 col-xs-5"><span>Tujuan Pembelajaran</span></div>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" <?php echo @$tujuan_block ?>>
+              <li <?php echo @$tujuan_active; ?>>
+                <a href="<?php echo base_url('tujuan') ?>">
+                  <i class="material-icons">more_horiz</i>
+                  <span class="multi-li">Tujuan Pembelajaran</span>
+                </a>
+              </li>
+              <li <?php echo @$peta_active; ?>>
+                <a href="<?php echo base_url('peta') ?>">
+                  <i class="material-icons">more_horiz</i>
+                  <span class="multi-li">Peta Kompetensi</span>
+                </a>
+              </li>
+              <li <?php echo @$rencana_active; ?>>
+                <a href="<?php echo base_url('rencana') ?>">
+                  <i class="material-icons">more_horiz</i>
+                  <span class="multi-li">Rencana Pembelajaran</span> <br/>
+                  <span style="margin-left: 45px;">Semester</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li <?php echo @$collassion; ?>>
+            <a href="<?php echo base_url() ?>collassion">
+              <div class="col-md-1 col-xs-1"><i class="material-icons">info</i></div> <div class="col-md-5 col-xs-5"><span>Collassion Learning</span></div>
+            </a>
+          </li>
+
+        <?php endif ?>
+
         <?php if ($this->session->userdata('level') == 1): ?>
           
           <li <?php echo @$kelas; ?>>
@@ -211,6 +252,10 @@
             </a>
           </li>
 
+        <?php endif ?>
+
+        <?php if ($this->session->userdata('level') < 3): ?>
+
           <li class="treeview <?php echo @$open ?>">
             <a href="#">
               <div class="col-md-1 col-xs-1"><i class="material-icons">people_alt</i></div> 
@@ -220,6 +265,9 @@
               </span>
             </a>
             <ul class="treeview-menu" <?php echo @$block ?>>
+
+              <?php if ($this->session->userdata('level') == 1): ?>
+
               <li <?php echo @$admin_active; ?>>
                 <a href="<?php echo base_url('admin') ?>">
                   <i class="material-icons">more_horiz</i>
@@ -232,6 +280,9 @@
                   <span class="multi-li">Guru</span>
                 </a>
               </li>
+
+              <?php endif ?>
+              
               <li <?php echo @$siswa_active; ?>>
                 <a href="<?php echo base_url('siswa') ?>">
                   <i class="material-icons">more_horiz</i>
@@ -241,20 +292,20 @@
             </ul>
           </li>
 
-        <?php endif ?>
+          <?php endif ?>
 
-        <?php if ($this->session->userdata('level') < 3): ?>
+        <?php if ($this->session->userdata('level') == 2): ?>
 
         <li <?php echo @$kelompok; ?>>
           <a href="<?php echo base_url() ?>kelompok">
-            <div class="col-md-1 col-xs-1"><i class="material-icons">view_agenda</i></div> <div class="col-md-5 col-xs-5"><span>Kelompok</span></div>
+            <div class="col-md-1 col-xs-1"><i class="material-icons">pages</i></div> <div class="col-md-5 col-xs-5"><span>Kelompok</span></div>
           </a>
         </li>
 
         <?php endif ?>
 
-        <?php if ($this->session->userdata('level') == 3): ?>
-        
+        <?php if ($this->session->userdata('level') > 1): ?>
+
         <li class="treeview <?php echo @$open_diskusi ?>">
           <a href="#">
             <div class="col-md-1 col-xs-1"><i class="material-icons">message</i></div> 
@@ -265,19 +316,19 @@
           </a>
           <ul class="treeview-menu" <?php echo @$block_diskusi ?>>
             <li <?php echo @$kelas_diskusi_active; ?>>
-              <a href="<?php echo base_url('diskusi/kelas') ?>">
+              <a href="<?= ($this->session->userdata('level') == 3)? base_url('diskusi/kelas') : base_url('diskusi/kelas_table') ?>">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Kelas</span>
               </a>
             </li>
             <li <?php echo @$materi_diskusi_active; ?>>
-              <a href="<?php echo base_url('diskusi/materi') ?>">
+              <a href="<?php echo base_url('diskusi/materi'); ?>">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Materi</span>
               </a>
             </li>
             <li <?php echo @$kelompok_diskusi_active; ?>>
-              <a href="<?php echo base_url('diskusi/kelompok') ?>">
+              <a href="<?= ($this->session->userdata('level') == 3)? base_url('diskusi/kelompok') : base_url('diskusi/kelompok_table') ?>">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Kelompok</span>
               </a>
@@ -287,6 +338,18 @@
 
         <?php endif ?>
 
+        <?php if ($this->session->userdata('level') < 3): ?>
+
+        <li <?php echo @$semester; ?>>
+          <a href="<?php echo base_url() ?>semester">
+            <div class="col-md-1 col-xs-1"><i class="material-icons">developer_board</i></div> <div class="col-md-5 col-xs-5"><span>Semester</span></div>
+          </a>
+        </li>
+
+        <?php endif ?>
+
+        <?php if ($this->session->userdata('level') > 1): ?>
+
         <hr>
 
         <li <?php echo @$materi; ?>>
@@ -295,80 +358,7 @@
           </a>
         </li>
 
-        <li class="treeview <?php echo @$open_menu_latihan ?>">
-          <a href="#">
-            <div class="col-md-1 col-xs-1"><i class="material-icons">chrome_reader_mode</i></div> 
-            <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu" <?php echo @$block_menu_latihan ?>>
-
-            <li class="treeview" <?php echo @$open_latihan ?>>
-              <a href="#">
-                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
-                <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu block" <?php echo @$block_latihan ?>>
-                <li <?php echo @$assigment_active; ?>>
-                  <a href="<?php echo base_url() ?>assigment">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Assigment</span>
-                  </a>
-                </li>
-                <li <?php echo @$latihan_essay_active; ?>>
-                  <a href="<?php echo base_url() ?>essay">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Essay</span>
-                  </a>
-                </li>
-                <li <?php echo @$latihan_pilihan_active; ?>>
-                  <a href="<?php echo base_url() ?>pilihan">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Pilihan Ganda</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="treeview <?php echo @$open_koreksi ?>">
-              <a href="#">
-                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
-                <div class="col-md-5 col-xs-5"><span>Koreksi Latihan</span></div>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span> 
-              </a>
-              <ul class="treeview-menu block" <?php echo @$block_koreksi ?>>
-                <li <?php echo @$koreksi_assigment_active; ?>>
-                  <a href="<?php echo base_url() ?>assigment/koreksi">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Assigment</span>
-                  </a>
-                </li>
-                <li <?php echo @$koreksi_essay_active; ?>>
-                  <a href="<?php echo base_url() ?>essay/koreksi">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Essay</span>
-                  </a>
-                </li>
-                <li <?php echo @$koreksi_pilihan_active; ?>>
-                  <a href="<?php echo base_url() ?>pilihan/koreksi">
-                    <i class="material-icons">more_horiz</i>
-                    <span class="multi-li">Pilihan Ganda</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-        </li>
-
-        <!-- <li class="treeview <?php echo @$open_latihan ?>">
+        <li class="treeview <?php echo @$open_latihan ?>">
           <a href="#">
             <div class="col-md-1 col-xs-1"><i class="material-icons">chrome_reader_mode</i></div> 
             <div class="col-md-5 col-xs-5"><span>Latihan</span></div>
@@ -377,56 +367,83 @@
             </span>
           </a>
           <ul class="treeview-menu" <?php echo @$block_latihan ?>>
-            <li <?php echo @$latihan_assigment_active; ?>>
-              <a href="<?php echo base_url() ?>assigment">
+            <li <?php echo @$latihan_active; ?>>
+              <a href="<?php echo base_url() ?>latihan">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Assigment</span>
+                <span class="multi-li">Latihan</span>
               </a>
             </li>
-            <li <?php echo @$latihan_essay_active; ?>>
-              <a href="<?php echo base_url() ?>essay">
+            <li <?php echo @$latihan_koreksi_active; ?>>
+              <a href="<?php echo base_url() ?>latihan/koreksi">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Essay</span>
-              </a>
-            </li>
-            <li <?php echo @$latihan_pilihan_active; ?>>
-              <a href="<?php echo base_url() ?>pilihan">
-                <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Pilihan Ganda</span>
+                <?php if ($this->session->userdata('level') < 3): ?>
+                  <span class="multi-li">Koreksi Latihan</span>
+                <?php else: ?>
+                  <span class="multi-li">Nilai Latihan</span>
+                <?php endif ?>                
               </a>
             </li>
           </ul>
-        </li> -->
+        </li>
 
-        <!-- <li class="treeview <?php echo @$open_koreksi_latihan ?>">
+        <li class="treeview <?php echo @$open_test ?>">
           <a href="#">
-            <div class="col-md-1 col-xs-1"><i class="material-icons">border_color</i></div> 
-            <div class="col-md-5 col-xs-5"><span><?=($this->session->userdata('level') < 3)?'Koreksi latihan':'Hasil latihan' ?></span></div>
+            <div class="col-md-1 col-xs-1"><i class="material-icons">note_add</i></div> 
+            <div class="col-md-5 col-xs-5"><span>Test</span></div>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" <?php echo @$block_koreksi_latihan ?>>
-            <li <?php echo @$latihan_koreksi_assigment_active; ?>>
-              <a href="<?php echo base_url() ?>assigment/koreksi">
+          <ul class="treeview-menu" <?php echo @$block_test ?>>
+            <li <?php echo @$pre_active; ?>>
+              <a href="<?php echo base_url() ?>pre">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Assigment</span>
+                <span class="multi-li">Pre Test</span>
               </a>
             </li>
-            <li <?php echo @$latihan_koreksi_essay_active; ?>>
-              <a href="<?php echo base_url() ?>essay/koreksi">
+            <li <?php echo @$post_active; ?>>
+              <a href="<?php echo base_url() ?>post">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Essay</span>
+                <span class="multi-li">Post Test</span>
               </a>
             </li>
-            <li <?php echo @$latihan_koreksi_pilihan_active; ?>>
-              <a href="<?php echo base_url() ?>pilihan/koreksi">
+            <li <?php echo @$formative_active; ?>>
+              <a href="<?php echo base_url() ?>formative">
                 <i class="material-icons">more_horiz</i>
-                <span class="multi-li">Pilihan Ganda</span>
+                <span class="multi-li">Formative Test</span>
               </a>
+            </li>
+            <li class="treeview <?php echo @$open_test_nilai ?>">
+              <a href="#">
+                <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
+                <div class="col-md-5 col-xs-5"><span>Nilai Test</span></div>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu block" <?php echo @$block_test_nilai ?>>
+                <li <?php echo @$pre_hasil_active; ?>>
+                  <a href="<?php echo base_url() ?>pre/hasil_view">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Nilai Pre Test</span>
+                  </a>
+                </li>
+                <li <?php echo @$post_hasil_active; ?>>
+                  <a href="<?php echo base_url() ?>post/hasil_view">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Nilai Post Test</span>
+                  </a>
+                </li>
+                <li <?php echo @$formative_hasil_active; ?>>
+                  <a href="<?php echo base_url() ?>formative/hasil_view">
+                    <i class="material-icons">more_horiz</i>
+                    <span class="multi-li">Nilai Formative Test</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
-        </li> -->
+        </li>
 
         <li class="treeview <?php echo @$open_ujian ?>">
           <a href="#">
@@ -437,19 +454,19 @@
             </span>
           </a>
           <ul class="treeview-menu" <?php echo @$block_ujian ?>>
-            <li <?php echo @$ujian_soal_active; ?>>
-              <a href="<?php echo base_url() ?>ujian">
+            <li <?php echo @$ujian_essay_active; ?>>
+              <a href="<?php echo base_url() ?>ujian_essay">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Essay</span>
               </a>
             </li>
-            <li <?php echo @$ujian_soal_active; ?>>
-              <a href="<?php echo base_url() ?>ujian">
+            <li <?php echo @$ujian_pilihan_active; ?>>
+              <a href="<?php echo base_url() ?>ujian_pilihan">
                 <i class="material-icons">more_horiz</i>
                 <span class="multi-li">Pilihan Ganda</span>
               </a>
             </li>
-            <li class="treeview">
+            <li class="treeview <?php echo @$open_ujian_hasil ?>">
               <a href="#">
                 <div class="col-md-1 col-xs-1"><i class="material-icons">more_horiz</i></div> 
                 <div class="col-md-5 col-xs-5"><span>Nilai Ujian</span></div>
@@ -457,15 +474,15 @@
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
-              <ul class="treeview-menu block" <?php echo @$block_ujian ?>>
-                <li <?php echo @$ujian_soal_active; ?>>
-                  <a href="<?php echo base_url() ?>ujian/hasil_view">
+              <ul class="treeview-menu block" <?php echo @$block_ujian_hasil ?>>
+                <li <?php echo @$ujian_essay_hasil_active; ?>>
+                  <a href="<?php echo base_url() ?>ujian_essay/koreksi">
                     <i class="material-icons">more_horiz</i>
                     <span class="multi-li">Essay</span>
                   </a>
                 </li>
-                <li <?php echo @$ujian_soal_active; ?>>
-                  <a href="<?php echo base_url() ?>ujian/hasil_view">
+                <li <?php echo @$ujian_pilihan_hasil_active; ?>>
+                  <a href="<?php echo base_url() ?>ujian_pilihan/hasil_view">
                     <i class="material-icons">more_horiz</i>
                     <span class="multi-li">Pilihan Ganda</span>
                   </a>
@@ -475,13 +492,25 @@
           </ul>
         </li>
 
-        <hr>
+        <li <?php echo @$rekap; ?>>
+          <a href="<?php echo base_url() ?>rekap">
+            <div class="col-md-1 col-xs-1"><i class="material-icons">insert_chart</i></div> <div class="col-md-5 col-xs-5"><span>Rekap Nilai</span></div>
+          </a>
+        </li>
+
+         <li <?php echo @$modul; ?>>
+          <a href="<?php echo base_url() ?>modul">
+            <div class="col-md-1 col-xs-1"><i class="material-icons">description</i></div> <div class="col-md-5 col-xs-5"><span>Modul</span></div>
+          </a>
+        </li>
 
         <li <?php echo @$video; ?>>
           <a href="<?php echo base_url() ?>video">
             <div class="col-md-1 col-xs-1"><i class="material-icons">play_circle_filled</i></div> <div class="col-md-5 col-xs-5"><span>Video</span></div>
           </a>
         </li>
+
+        <?php endif ?>
 
         <!-- <li <?php echo @$hiburan; ?>>
           <a href="<?php echo base_url() ?>hiburan">

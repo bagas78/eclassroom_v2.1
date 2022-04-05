@@ -22,7 +22,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-         <a href="<?php echo base_url() ?>assigment">
+         <a href="<?php echo base_url() ?>latihan">
           <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
             <div class="inner">
               <h3><?php echo $latihan; ?></h3>
@@ -38,7 +38,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <a href="<?php echo base_url() ?>ujian/hasil_view">
+          <a href="<?php echo base_url() ?>modul">
             <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
               <div class="inner">
                 <h3><?php echo $modul; ?></h3>
