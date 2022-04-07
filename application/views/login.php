@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>E-Classroom</title>
+    <title>Collassion Learning - App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -37,7 +37,7 @@
               <div class="info align-items-center">
                 <div class="content" align="center">
                   <div class="logo">
-                    <h1>E-CLASSROOM</h1>
+                    <h1 style="font-size: 30px;">Collassion Learning - App</h1>
 
                     <img style="width: 80%;" src="<?php echo base_url() ?>assets/gambar/study2.jpg">
 
