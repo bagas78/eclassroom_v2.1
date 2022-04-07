@@ -13,7 +13,7 @@ class Video extends CI_Controller{
 
 			switch ($level) {
 				case '1':
-					// admin
+					// admin 
 					$data['data'] = $this->query_builder->view("SELECT * FROM t_album as a JOIN t_pelajaran as b ON a.album_pelajaran = b.pelajaran_id WHERE a.album_jenis = 'video' AND a.album_hapus = 0 order by a.album_id desc");
 					break;
 				

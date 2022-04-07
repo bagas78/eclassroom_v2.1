@@ -6,9 +6,11 @@
       <div class="box">  
         <div class="box-header with-border">  
 
-          <div align="left">
-            <button class="btn btn-default" data-toggle="modal" data-target="#modal-album"><i class="fa fa-plus"></i> Tambah</button>
-          </div>
+          <?php if ($this->session->userdata('level') < 3): ?>
+            <div align="left">
+              <button class="btn btn-default" data-toggle="modal" data-target="#modal-album"><i class="fa fa-plus"></i> Tambah</button>
+            </div>
+          <?php endif ?>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -113,7 +115,7 @@
                     </div>
 
                     <div class="form-group">
-                       <label>Pelajaran</label>
+                       <label>Mata Kuliah</label>
                        <select id="pelajaran" name="post_pelajaran" class="form-control">
                           <option value="" hidden="">-- Pilih --</option>
                           <?php foreach ($pelajaran_data as $val): ?>

@@ -78,7 +78,7 @@
                             <input type="text" name="album_name" class="form-control" required="" value="<?php echo $key['album_name'] ?>">
                           </div>
                           <div class="form-group"> 
-                            <label>Pelajaran</label>
+                            <label>Mata Kuliah</label>
                             <select id="pelajaran<?php echo $key['album_id']; ?>" required="" name="album_pelajaran" class="form-control">
                               <option value="" hidden="">-- Pilih --</option>
                               <?php foreach ($pelajaran_data as $pelajaran): ?>
@@ -142,7 +142,7 @@
                 <input type="text" name="album_name" class="form-control" required="">
               </div>
               <div class="form-group"> 
-                <label>Pelajaran</label>
+                <label>Mata Kuliah</label>
                 <select id="pelajaran" required="" name="album_pelajaran" class="form-control">
                   <option value="" hidden="">-- Pilih --</option>
                   <?php foreach ($pelajaran_data as $pelajaran): ?>

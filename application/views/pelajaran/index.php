@@ -22,7 +22,7 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Pelajaran</th>
+                  <th>Mata Kuliah</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -53,8 +53,8 @@
                           <form role="form" method="post" action="<?php echo base_url() ?>pelajaran/update/<?php echo $key['pelajaran_id'] ?>" enctype="multipart/form-data">
                             <div class="box-body">
                               <div class="form-group">
-                                <label>Pelajaran</label>
-                                <input required="" type="text" name="pelajaran_nama" class="form-control" placeholder="Nama pelajaran" value="<?php echo $key['pelajaran_nama'] ?>">
+                                <label>Mata Kuliah</label>
+                                <input required="" type="text" name="pelajaran_nama" class="form-control" placeholder="Mata Kuliah" value="<?php echo $key['pelajaran_nama'] ?>">
                               </div>
                             </div>
                             <!-- /.box-body -->
@@ -95,8 +95,8 @@
                 <form role="form" method="post" action="<?php echo base_url() ?>pelajaran/add" enctype="multipart/form-data">
                   <div class="box-body">
                     <div class="form-group">
-                      <label>Pelajaran</label>
-                      <input required="" type="text" name="pelajaran_nama" class="form-control" placeholder="Nama pelajaran" value="">
+                      <label>Mata Kuliah</label>
+                      <input required="" type="text" name="pelajaran_nama" class="form-control" placeholder="Mata Kuliah" value="">
                     </div>
                   </div>
                   <!-- /.box-body -->

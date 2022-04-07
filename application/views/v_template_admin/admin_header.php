@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->  
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->  
+  <!-- Theme style -->   
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins 
        folder instead of downloading all of them to reduce the load. -->
@@ -232,7 +232,7 @@
 
           <li <?php echo @$collassion; ?>>
             <a href="<?php echo base_url() ?>collassion">
-              <div class="col-md-1 col-xs-1"><i class="material-icons">info</i></div> <div class="col-md-5 col-xs-5"><span>Collassion Learning</span></div>
+              <div class="col-md-1 col-xs-1"><i class="material-icons">layers</i></div> <div class="col-md-5 col-xs-5"><span>Collassion Learning</span></div>
             </a>
           </li>
 
@@ -248,7 +248,7 @@
 
           <li <?php echo @$pelajaran; ?>>
             <a href="<?php echo base_url() ?>pelajaran">
-              <div class="col-md-1 col-xs-1"><i class="material-icons">menu_book</i></div> <div class="col-md-5 col-xs-5"><span>Pelajaran</span></div>
+              <div class="col-md-1 col-xs-1"><i class="material-icons">menu_book</i></div> <div class="col-md-5 col-xs-5"><span>Mata Kuliah</span></div>
             </a>
           </li>
 
@@ -277,7 +277,7 @@
               <li <?php echo @$guru_active; ?>>
                 <a href="<?php echo base_url('guru') ?>">
                   <i class="material-icons">more_horiz</i>
-                  <span class="multi-li">Guru</span>
+                  <span class="multi-li">Dosen</span>
                 </a>
               </li>
 
@@ -286,7 +286,7 @@
               <li <?php echo @$siswa_active; ?>>
                 <a href="<?php echo base_url('siswa') ?>">
                   <i class="material-icons">more_horiz</i>
-                  <span class="multi-li">Siswa</span>
+                  <span class="multi-li">Mahasiswa</span>
                 </a>
               </li>
             </ul>
@@ -511,6 +511,12 @@
         </li>
 
         <?php endif ?>
+
+        <li <?php echo @$panduan; ?>>
+          <a href="<?php echo base_url() ?>panduan">
+            <div class="col-md-1 col-xs-1"><i class="material-icons">help</i></div> <div class="col-md-5 col-xs-5"><span>Panduan Pengguna</span></div>
+          </a>
+        </li>
 
         <!-- <li <?php echo @$hiburan; ?>>
           <a href="<?php echo base_url() ?>hiburan">

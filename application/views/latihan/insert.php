@@ -45,7 +45,7 @@
                 <input required="" type="text" name="latihan_judul" class="form-control" value="">
               </div>
               <div class="form-group col-md-4"> 
-                <label>Pelajaran</label>
+                <label>Mata Kuliah</label>
                 <select id="pelajaran" required="" name="latihan_pelajaran" class="form-control">
                   <option value="" hidden="">-- Pilih --</option>
                   <?php foreach ($pelajaran_data as $pelajaran): ?>

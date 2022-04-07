@@ -123,7 +123,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Pelajaran</label>
+                  <label>Mata Kuliah</label>
                   <select id="pelajaran" required="" class="form-control" name="pelajaran">
                     <option value="" hidden="">-- Pelajaran --</option>
                     <?php foreach ($pelajaran_data as $key): ?>

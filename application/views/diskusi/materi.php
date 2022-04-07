@@ -19,7 +19,7 @@
                 <thead>
                 <tr>
                   <th>Judul</th>
-                  <th>Pelajaran</th>
+                  <th>Mata Kuliah</th>
                   <th width="1">Action</th>
                 </tr>
                 </thead>

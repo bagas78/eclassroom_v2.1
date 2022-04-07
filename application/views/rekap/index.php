@@ -14,7 +14,7 @@
                   <?php foreach (@$mahasiswa_data as$key): ?>
                     <option value="<?php echo @$key['user_id'] ?>"><?php echo @$key['user_name'] ?></option>
                   <?php endforeach ?>
-                </select>
+                </select> 
               </div>
               <div class="col-md-3 col-xs-3 row">
                 <select id="pelajaran" required="" name="pelajaran" class="form-control">
@@ -65,7 +65,7 @@
 
           <br/><br/>
           
-          <table class="table table-bordered">
+          <table class="table table-bordered table-responsive">
             <thead>
               <tr>
                 <td colspan="4" style="background: floralwhite;"></td>
@@ -98,13 +98,13 @@
               <?php endforeach ?>
             </tbody>
             <tfoot>
-              <tr>
+              <tr id="view_uas_pilihan">
                 <td style="background: bisque;">UAS ( Pilihan Ganda )</td>
                 <td colspan="5" style="background: floralwhite;"></td>
                 <td id="uas_pilihan"></td>
                 <td class="total" id="uas_pilihan_total"></td>
               </tr>
-              <tr>
+              <tr id="view_uas_essay">
                 <td style="background: bisque;">UAS ( Essay )</td>
                 <td colspan="5" style="background: floralwhite;"></td>
                 <td id="uas_essay"></td>
@@ -114,6 +114,7 @@
                 <td colspan="6" style="background: floralwhite;"></td>
                 <td style="background: lavender;">NILAI AKHIR</td>
                 <td id="nilai_akhir" style="background: crimson;color: white;"></td>
+                <td id="grade" style="background: bisque;"></td>
               </tr>
             </tfoot>
           </table>
@@ -202,8 +203,17 @@
   <?php endforeach ?>
 
   //uas
-  $('#uas_pilihan').text(<?php echo @$ujian_pilihan_view['nilai'] ?>);
-  $('#uas_essay').text(<?php echo @$ujian_essay_view['nilai'] ?>);
+  <?php if (@$ujian_pilihan_view['nilai']): ?>
+    $('#uas_pilihan').text(<?php echo @$ujian_pilihan_view['nilai'] ?>);
+  <?php else: ?>
+    $('#view_uas_pilihan').remove();
+  <?php endif ?>
+
+  <?php if (@$ujian_essay_view['nilai']): ?>
+    $('#uas_essay').text(<?php echo @$ujian_essay_view['nilai'] ?>);
+  <?php else: ?>
+    $('#view_uas_essay').remove();
+  <?php endif ?>
 
   //uas total
   var pilihan = parseInt($('#uas_pilihan').text());
@@ -215,9 +225,24 @@
   var sum = 0;
   $('.total').each(function(){
       sum += parseInt($(this).text());
-
-      console.log(sum);
   });
 
   $('#nilai_akhir').text(sum);
+
+  if (sum >= 80) {
+    $('#grade').text('A');
+  } 
+  if (sum >= 70 && sum <= 79) {
+    $('#grade').text('B');
+  } 
+  if (sum >= 60 && sum <= 69) {
+    $('#grade').text('C');
+  } 
+  if (sum >= 40 && sum <= 59) {
+    $('#grade').text('D');
+  } 
+  if (sum <= 40) {
+    $('#grade').text('E');
+  } 
+
 </script>

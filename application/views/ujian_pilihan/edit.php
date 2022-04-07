@@ -28,7 +28,7 @@
           </div>
 
            <div class="form-group col-md-6">
-             <label>Pelajaran</label>
+             <label>Mata Kuliah</label>
              <select id="pelajaran" name="ujian_pilihan_pelajaran" class="form-control">
                 <option value="" hidden="">-- Pilih --</option>
                 <?php foreach ($pelajaran_data as $val): ?>

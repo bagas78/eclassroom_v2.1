@@ -24,7 +24,7 @@
                 <tr>
                   <th width="1">Foto</th>
                   <th>Nama</th>
-                  <th>NIM/NISN</th>
+                  <th>NIM</th>
                   <th>Kelas</th>
                   <th>Action</th>
                 </tr>
@@ -64,8 +64,8 @@
                                 <input required="" type="text" name="name" class="form-control" placeholder="Nama Lengkap" value="<?php echo $key['user_name'] ?>">
                               </div>
                               <div class="form-group">
-                                <label>NIM/NISN</label>
-                                <input required="" type="number" name="email" class="form-control" placeholder="NIM/NISN" value="<?php echo $key['user_email'] ?>">
+                                <label>NIM</label>
+                                <input required="" type="number" name="email" class="form-control" placeholder="NIM" value="<?php echo $key['user_email'] ?>">
                               </div>
                               <div class="form-group">
                                 <label>Kelas</label>
@@ -179,8 +179,8 @@
                       <input required="" type="text" name="name" class="form-control" placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group">
-                      <label>NIM/NISN</label>
-                      <input required="" type="number" name="email" class="form-control" placeholder="NIM/NISN">
+                      <label>NIM</label>
+                      <input required="" type="number" name="email" class="form-control" placeholder="NIM">
                     </div>
                     <div class="form-group">
                       <label>Kelas</label>

@@ -6,11 +6,11 @@
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-           <a href="<?php echo base_url() ?>materi">
+           <a href="<?= ($this->session->userdata('level') == 1)? '#': base_url('materi') ?>">
             <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
               <div class="inner">
                 <h3><?php echo $materi ?></h3>
-
+ 
                 <p>Materi</p> 
               </div>
               <div class="icon"> 
@@ -22,7 +22,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-         <a href="<?php echo base_url() ?>latihan">
+         <a href="<?= ($this->session->userdata('level') == 1)? '#': base_url('latihan') ?>">
           <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
             <div class="inner">
               <h3><?php echo $latihan; ?></h3>
@@ -38,7 +38,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <a href="<?php echo base_url() ?>modul">
+          <a href="<?= ($this->session->userdata('level') == 1)? '#': base_url('modul') ?>">
             <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
               <div class="inner">
                 <h3><?php echo $modul; ?></h3>
@@ -54,7 +54,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <a href="<?php echo base_url() ?>video">
+          <a href="<?= ($this->session->userdata('level') == 1)? '#': base_url('video') ?>">
             <div class="small-box img-thumbnail" style="border-width: 3px; border-color: #ffffff; color: #b9253b;">
               <div class="inner">
                 <h3><?php echo $video; ?></h3>

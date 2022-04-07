@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2022 at 06:14 PM
+-- Generation Time: Apr 07, 2022 at 07:19 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -429,6 +429,26 @@ INSERT INTO `t_modul` (`modul_id`, `modul_user`, `modul_pelajaran`, `modul_kelas
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_panduan`
+--
+
+CREATE TABLE `t_panduan` (
+  `panduan_id` int(11) NOT NULL,
+  `panduan_video` text NOT NULL,
+  `panduan_file` text NOT NULL,
+  `panduan_tanggal` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_panduan`
+--
+
+INSERT INTO `t_panduan` (`panduan_id`, `panduan_video`, `panduan_file`, `panduan_tanggal`) VALUES
+(1, 'iOUQEg9soWk', 'panduan_pengguna.pdf', '2022-04-07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_pelajaran`
 --
 
@@ -773,7 +793,7 @@ CREATE TABLE `t_ujian_essay_hasil` (
 --
 
 INSERT INTO `t_ujian_essay_hasil` (`ujian_essay_hasil_id`, `ujian_essay_hasil_durasi_sisa`, `ujian_essay_hasil_siswa`, `ujian_essay_hasil_soal`, `ujian_essay_hasil_jawaban`, `ujian_essay_hasil_nilai`, `ujian_essay_hasil_nilai_total`, `ujian_essay_hasil_pengkoreksi`, `ujian_essay_hasil_tanggal`, `ujian_essay_hasil_hapus`) VALUES
-(8, '9 menit : 44 detik', '11', 'SOAL1', '{\"id\":\"SOAL1\",\"timer\":\"9 menit : 44 detik\",\"jawab1\":\"Donat Meses\",\"jawab2\":\"Donat Kentang\"}', '{\"jumlah\":\"2\",\"nilai1\":\"10\",\"nilai2\":\"10\"}', '20', '8', '2022-04-03', 0);
+(8, '9 menit : 44 detik', '11', 'SOAL1', '{\"id\":\"SOAL1\",\"timer\":\"9 menit : 44 detik\",\"jawab1\":\"Donat Meses\",\"jawab2\":\"Donat Kentang\"}', '{\"jumlah\":\"2\",\"nilai1\":\"10\",\"nilai2\":\"10\"}', '20', '8', '2022-04-03', 1);
 
 -- --------------------------------------------------------
 
@@ -973,6 +993,12 @@ ALTER TABLE `t_modul`
   ADD PRIMARY KEY (`modul_id`);
 
 --
+-- Indexes for table `t_panduan`
+--
+ALTER TABLE `t_panduan`
+  ADD PRIMARY KEY (`panduan_id`);
+
+--
 -- Indexes for table `t_pelajaran`
 --
 ALTER TABLE `t_pelajaran`
@@ -1131,6 +1157,12 @@ ALTER TABLE `t_materi`
 --
 ALTER TABLE `t_modul`
   MODIFY `modul_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `t_panduan`
+--
+ALTER TABLE `t_panduan`
+  MODIFY `panduan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_pelajaran`
