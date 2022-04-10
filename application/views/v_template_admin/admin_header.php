@@ -2,7 +2,7 @@
 <html>  
 <head> 
   <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
   <title>Collassion Learning - App</title> 
   <link rel="shortcut icon" href="<?php echo base_url() ?>assets/gambar/icon.png" />
   <!-- Tell the browser to be responsive to screen width -->
@@ -512,11 +512,25 @@
 
         <?php endif ?>
 
+        <?php if ($this->session->userdata('level') > 1): ?>
+
+        <li <?php echo @$panduan_mahasiswa; ?>>
+          <a href="<?php echo base_url() ?>panduan/mahasiswa">
+            <div class="col-md-1 col-xs-1"><i class="material-icons"><?= ($this->session->userdata('level') == 2)?'control_point':'help' ?></i></div> <div class="col-md-5 col-xs-5"><span><?= ($this->session->userdata('level') == 2)?'Panduan Mahasiswa':'Panduan Pengguna' ?></span></div>
+          </a>
+        </li>
+
+        <?php endif ?>
+
+        <?php if ($this->session->userdata('level') < 3): ?>
+
         <li <?php echo @$panduan; ?>>
           <a href="<?php echo base_url() ?>panduan">
             <div class="col-md-1 col-xs-1"><i class="material-icons">help</i></div> <div class="col-md-5 col-xs-5"><span>Panduan Pengguna</span></div>
           </a>
         </li>
+
+        <?php endif ?>
 
         <!-- <li <?php echo @$hiburan; ?>>
           <a href="<?php echo base_url() ?>hiburan">

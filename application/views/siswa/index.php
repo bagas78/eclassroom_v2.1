@@ -65,7 +65,7 @@
                               </div>
                               <div class="form-group">
                                 <label>NIM</label>
-                                <input required="" type="number" name="email" class="form-control" placeholder="NIM" value="<?php echo $key['user_email'] ?>">
+                                <input required="" type="text" name="email" class="form-control" placeholder="NIM" value="<?php echo $key['user_email'] ?>">
                               </div>
                               <div class="form-group">
                                 <label>Kelas</label>
@@ -180,7 +180,7 @@
                     </div>
                     <div class="form-group">
                       <label>NIM</label>
-                      <input required="" type="number" name="email" class="form-control" placeholder="NIM">
+                      <input required="" type="text" name="email" class="form-control" placeholder="NIM">
                     </div>
                     <div class="form-group">
                       <label>Kelas</label>

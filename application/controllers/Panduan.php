@@ -6,34 +6,77 @@ class Panduan extends CI_Controller{
 	} 
 	function index(){
 		if ( $this->session->userdata('login') == 1) {
+
+			$level = $this->session->userdata('level');
+
+			if ($level == 1) {
+				$data['open'] = 1;
+			}else{
+				$data['open'] = 0;
+			}
+
 		    $data['title'] = 'Panduan Pengguna';
 		    $data['panduan'] = 'class="active"';
-		    $data['data'] = $this->query_builder->view_row("SELECT * FROM t_panduan");
+		    $data['data'] = $this->query_builder->view_row("SELECT * FROM t_panduan WHERE panduan_for = 'dosen'");
+		    $data['for'] = 'dosen';
 
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('panduan/index');
 		    $this->load->view('v_template_admin/admin_footer');
 
-		} 
+		}  
+		else{
+			redirect(base_url('login'));
+		}
+	}
+	function mahasiswa(){
+		if ( $this->session->userdata('login') == 1) {
+
+			$level = $this->session->userdata('level');
+
+			if ($level == 2) {
+				$data['open'] = 1;
+			}else{
+				$data['open'] = 0;
+			}
+
+		 	$data['title'] = 'Panduan Pengguna';
+			$data['panduan_mahasiswa'] = 'class="active"';
+			$data['data'] = $this->query_builder->view_row("SELECT * FROM t_panduan WHERE panduan_for = 'mahasiswa'");
+			$data['for'] = 'mahasiswa';
+
+			$this->load->view('v_template_admin/admin_header',$data);
+			$this->load->view('panduan/index');
+			$this->load->view('v_template_admin/admin_footer');
+		}  
 		else{
 			redirect(base_url('login'));
 		}
 	}
 	function save(){
-		$video = $_POST['panduan_video'];
 
-		print_r($_POST);
+		if ($_POST['for'] == 'dosen') {
+			$name = 'panduan_dosen';
+			$url = base_url('panduan');
+		} else {
+			$name = 'panduan_mahasiswa';
+			$url = base_url('panduan/mahasiswa');
+		}
+
+		$video = $_POST['panduan_video'];
+		$id = $_POST['id'];
 
 		// youtube
 		$preg = substr($video, 0, strpos($video, "="));
     	$link = str_replace($preg.'=', '', $video); 
 
 		$set = array(
+						'panduan_for' => $_POST['for'],
 						'panduan_video' => $link,
 						'panduan_tanggal' => date('Y-m-d'),
 					);
 
-		$where = ['panduan_id' => 1];
+		$where = ['panduan_id' => $id];
 		$db = $this->query_builder->update('t_panduan',$set,$where);
 
 		if ($db == 1) {
@@ -53,7 +96,7 @@ class Panduan extends CI_Controller{
 			//replace name foto
 			$type = explode(".", $filename);
 	    	$no = count($type) - 1;
-	    	$pdf = 'panduan_pengguna.'.$type[$no];
+	    	$pdf = $name.'.'.$type[$no];
 	    	/////////////////////
 			
 			// exist file
@@ -69,14 +112,14 @@ class Panduan extends CI_Controller{
 	          $this->load->library('upload',$config);
 
 	          if ($this->upload->do_upload('panduan_file')) {
-	          	$where = ['panduan_id' => 1];
+	          	$where = ['panduan_id' => $id];
 	          	$set = ['panduan_file' => $pdf];
 				$this->query_builder->update('t_panduan',$set,$where);
 	          }
 	          
 		} 
 
-		redirect(base_url('panduan'));
+		redirect($url);
 	} 
 
 	function delete_file($file){

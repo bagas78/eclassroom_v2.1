@@ -37,7 +37,7 @@
                     <td style="width: 80px;">
                       <div>
                      <button class="btn btn-xs btn-default" data-toggle="modal" data-target="#edit<?php echo $key['semester_id'] ?>"><i class="fa fa-edit"></i></button>
-                      <button onclick="del('<?php echo base_url() ?>semester/delete/<?php echo $key['semester_no'] ?>')" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></button>
+                      <!-- <button onclick="del('<?php echo base_url() ?>semester/delete/<?php echo $key['semester_no'] ?>')" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></button> -->
 
                       </div>
                     </td>
@@ -56,7 +56,7 @@
                             <div class="box-body">
                               <div class="form-group">
                                 <label>Semester</label>
-                                <input readonly="" required="" type="number" name="semester_no" class="form-control" value="<?php echo $key['semester_no'] ?>">
+                                <input required="" type="number" name="semester_no" class="form-control" value="<?php echo $key['semester_no'] ?>">
                               </div>
                               <div class="form-group">
                                 <label>Jumlah Pertemuan</label>
@@ -102,7 +102,7 @@
           <div class="box-body">
             <div class="form-group">
               <label>Semester</label>
-              <input readonly="" required="" type="number" name="semester_no" class="form-control" value="<?php echo $current_semester ?>">
+              <input required="" type="number" name="semester_no" class="form-control" value="">
             </div>
             <div class="form-group">
               <label>Jumlah Pertemuan</label>

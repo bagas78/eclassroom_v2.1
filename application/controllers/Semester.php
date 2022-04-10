@@ -1,7 +1,7 @@
 <?php
 class Semester extends CI_Controller{
  
-	function __construct(){
+	function __construct(){ 
 		parent::__construct();
 	} 
 	function index(){
@@ -11,9 +11,9 @@ class Semester extends CI_Controller{
 
 		    $data['data'] = $this->query_builder->view("SELECT * FROM t_semester");
 
-		    $count = $this->query_builder->count("SELECT * FROM t_semester");
+		    // $count = $this->query_builder->count("SELECT * FROM t_semester");
 
-		    $data['current_semester'] = $count + 1;
+		    // $data['current_semester'] = $count + 1;
 
 		    $this->load->view('v_template_admin/admin_header',$data);
 			$this->load->view('semester/index');
@@ -26,30 +26,40 @@ class Semester extends CI_Controller{
 	} 
 	function insert(){
 		$sem = $_POST['semester_no'];
+
+		$cek = $this->query_builder->count("SELECT * FROM t_semester WHERE semester_no = '$sem'");
+
 		$jum = $_POST['semester_pertemuan'];
 
-		$set1 = array(
-						'semester_no' => $sem,
-						'semester_pertemuan' => $jum,
-					);
-
-		$db = $this->query_builder->add('t_semester',$set1);
-
-		if ($db == 1) {
-
-			for ($i=1; $i < $jum + 1; $i++) { 
-				// save pertemuan
-				$set2 = array(	
-								'pertemuan_no' => $i,
-								'pertemuan_semester' => $sem, 
-							);
-				$db = $this->query_builder->add('t_pertemuan',$set2);
-			}
-
-			$this->session->set_flashdata('success', 'Data berhasil di hapus');
+		if ($cek > 0) {
+			// ada
+			$this->session->set_flashdata('gagal','Semester sudah ada');
 		} else {
-			$this->session->set_flashdata('gagal', 'Data gagal di hapus');
+			// kosong
+			$set1 = array(
+							'semester_no' => $sem,
+							'semester_pertemuan' => $jum,
+						);
+
+			$db = $this->query_builder->add('t_semester',$set1);
+
+			if ($db == 1) {
+
+				for ($i=1; $i < $jum + 1; $i++) { 
+					// save pertemuan
+					$set2 = array(	
+									'pertemuan_no' => $i,
+									'pertemuan_semester' => $sem, 
+								);
+					$db = $this->query_builder->add('t_pertemuan',$set2);
+				}
+
+				$this->session->set_flashdata('success', 'Data berhasil di hapus');
+			} else {
+				$this->session->set_flashdata('gagal', 'Data gagal di hapus');
+			}
 		}
+		
 		
 		redirect(base_url('semester'));
 	}
