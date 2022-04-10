@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 07:19 AM
+-- Generation Time: Apr 10, 2022 at 11:18 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -436,6 +436,7 @@ CREATE TABLE `t_panduan` (
   `panduan_id` int(11) NOT NULL,
   `panduan_video` text NOT NULL,
   `panduan_file` text NOT NULL,
+  `panduan_for` set('dosen','mahasiswa') NOT NULL DEFAULT '',
   `panduan_tanggal` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -443,8 +444,9 @@ CREATE TABLE `t_panduan` (
 -- Dumping data for table `t_panduan`
 --
 
-INSERT INTO `t_panduan` (`panduan_id`, `panduan_video`, `panduan_file`, `panduan_tanggal`) VALUES
-(1, 'iOUQEg9soWk', 'panduan_pengguna.pdf', '2022-04-07');
+INSERT INTO `t_panduan` (`panduan_id`, `panduan_video`, `panduan_file`, `panduan_for`, `panduan_tanggal`) VALUES
+(1, 'iOUQEg9soWk', 'panduan_dosen.pdf', 'dosen', '2022-04-10'),
+(2, 'RRgqNM0_fsg', '', 'mahasiswa', '2022-04-10');
 
 -- --------------------------------------------------------
 
@@ -1162,7 +1164,7 @@ ALTER TABLE `t_modul`
 -- AUTO_INCREMENT for table `t_panduan`
 --
 ALTER TABLE `t_panduan`
-  MODIFY `panduan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `panduan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_pelajaran`
