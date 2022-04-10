@@ -122,15 +122,21 @@ class Panduan extends CI_Controller{
 		redirect($url);
 	} 
 
-	function delete_file($file){
+	function delete_file($id, $file){
+
+		if ($_POST['for'] == 'dosen') {
+			$url = base_url('panduan');
+		} else {			
+			$url = base_url('panduan/mahasiswa');
+		}
 
 		unlink('assets/panduan/'.$file); 
 		$set = ['panduan_file' => ''];
-		$where = ['panduan_id' => 1];
+		$where = ['panduan_id' => $id];
 		$this->query_builder->update('t_panduan',$set,$where);
 
 		$this->session->set_flashdata('success','Berhasil di hapus');
 
-		redirect(base_url('panduan'));
+		redirect($url);
 	}
 }

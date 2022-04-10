@@ -11,7 +11,7 @@
               <i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
-          </div>
+          </div> 
         </div>
         <div class="box-body">
 
@@ -50,13 +50,13 @@
 
           <?php if (@$data['panduan_file'] != ''): ?>
 
-          <div class="clearfix"></div><br/>
+          <div class="clearfix"></div><br/> 
               
           <span style="border-width: 1px;border-style: dashed;padding: 0.2%;"><?php echo $data['panduan_file']; ?></span> 
 
           <?php if ($open == 1): ?>
 
-            <a href="<?php echo base_url('panduan/delete_file/'.@$data['panduan_file']) ?>" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
+            <a href="<?php echo base_url('panduan/delete_file/'.@$data['panduan_id'].'/'.@$data['panduan_file']) ?>" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
           
           <?php endif ?>
 
