@@ -9,7 +9,7 @@ class Peta extends CI_Controller{
 			$data['tujuan'] = 'menu-open';
 			$data['tujuan_block'] = 'style="display: block;"';
 			$data['peta_active'] = 'class="active"';
-		    $data['title'] = 'Peta';
+		    $data['title'] = 'Peta'; 
 
 		    $level = $this->session->userdata('level');
 		    $pelajaran = $this->session->userdata('pelajaran');
@@ -49,26 +49,84 @@ class Peta extends CI_Controller{
 		$pelajaran = $this->session->userdata('pelajaran');
 		$user = $this->session->userdata('id');
 
-		$set = array(
-						'peta_pelajaran' => $pelajaran,
-						'peta_user' => $user,
-						'peta_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['peta_kelas'])),
-						'peta_isi' => $_POST['peta_isi'], 
-					);
+		if (@$_FILES['file']['name']) {
 
-		if ($this->query_builder->count("SELECT * FROM t_peta WHERE peta_pelajaran = '$pelajaran'")) {
-			// edit
-			$where = ['peta_pelajaran' => $pelajaran];
-			$db = $this->query_builder->update('t_peta',$set,$where);
+			//type file
+			$typefile = explode('/', $_FILES['file']['type']);
+
+			//replace Karakter name foto
+			$filename = $_FILES['file']['name'];
+
+			//replace name foto
+			$type = explode(".", $filename);
+	    	$no = count($type) - 1;
+	    	$new_name = md5(time()).'.'.$type[$no];
+	    	/////////////////////
+			
+			// exist file
+			  $config = array(
+			  'upload_path' 	=> './assets/img/peta',
+			  'allowed_types' 	=> "doc|docx|pdf|txt|xlsx",
+			  'overwrite' 		=> TRUE,
+			  'max_size' 		=> "10000",
+			  'file_name'		=> $new_name,
+			  );
+
+	          //Load upload library
+	          $this->load->library('upload',$config);
+
+			if ($this->upload->do_upload('file')) {
+
+				$set = array(
+								'peta_pelajaran' => $pelajaran,
+								'peta_user' => $user,
+								'peta_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['peta_kelas'])),
+								'peta_isi' => $_POST['peta_isi'],
+								'peta_file' => $new_name, 
+							);
+
+				if ($this->query_builder->count("SELECT * FROM t_peta WHERE peta_pelajaran = '$pelajaran'")) {
+					// edit
+					$where = ['peta_pelajaran' => $pelajaran];
+					$db = $this->query_builder->update('t_peta',$set,$where);
+				} else {
+					// insert
+					$db = $this->query_builder->add('t_peta',$set);
+				}
+
+				if ($db == 1) {
+					$this->session->set_flashdata('success','Data berhasil di tambah');
+				}else{
+					$this->session->set_flashdata('gagal','Data gagal di tambah');
+				}
+			
+			}else{
+				$this->session->set_flashdata('gagal','Periksa kembali file');
+			}
+
 		} else {
-			// insert
-			$db = $this->query_builder->add('t_peta',$set);
-		}
 
-		if ($db == 1) {
-			$this->session->set_flashdata('success','Data berhasil di tambah');
-		}else{
-			$this->session->set_flashdata('gagal','Data gagal di tambah');
+			$set = array(
+							'peta_pelajaran' => $pelajaran,
+							'peta_user' => $user,
+							'peta_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['peta_kelas'])),
+							'peta_isi' => $_POST['peta_isi'], 
+						);
+
+			if ($this->query_builder->count("SELECT * FROM t_peta WHERE peta_pelajaran = '$pelajaran'")) {
+				// edit
+				$where = ['peta_pelajaran' => $pelajaran];
+				$db = $this->query_builder->update('t_peta',$set,$where);
+			} else {
+				// insert
+				$db = $this->query_builder->add('t_peta',$set);
+			}
+
+			if ($db == 1) {
+				$this->session->set_flashdata('success','Data berhasil di tambah');
+			}else{
+				$this->session->set_flashdata('gagal','Data gagal di tambah');
+			}
 		}
 
 		redirect(base_url('peta'));

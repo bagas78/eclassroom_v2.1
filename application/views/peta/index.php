@@ -3,7 +3,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box"> 
         <div class="box-header with-border">
  
           <div class="box-tools pull-right">
@@ -35,6 +35,24 @@
               <label>Peta Kompetensi</label>
               <textarea name="peta_isi" id="editor1" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo @$data['peta_isi'] ?></textarea>
             </div>
+
+            <div class="form-group">
+              <label>Unggah File</label>
+              <input type="file" name="file" class="form-control">
+              <small style="margin-top: 1%;" class="badge">doc | docx | pdf | txt | xlsx</small>
+            </div>
+
+            <?php if ($data['peta_file'] != ''): ?>
+              
+              <span style="border-width: 1px;border-style: dashed;padding: 0.2%;"><?php echo $data['peta_file']; ?></span> 
+
+              <a href="#" onclick="del_file('<?php echo $data['peta_id'] ?>','<?php echo $data['peta_file'] ?>')" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
+
+              <a href="<?php echo base_url('assets/materi/'.$data['peta_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
+
+            <?php endif ?>
+
+            <div class="clearfix"></div>
 
           <br/> 
           <button class="btn btn-default" type="submit"><i class="fa fa-check"></i> Simpan</button>

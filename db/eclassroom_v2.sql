@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2022 at 11:18 AM
+-- Generation Time: Apr 12, 2022 at 11:29 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -446,7 +446,7 @@ CREATE TABLE `t_panduan` (
 
 INSERT INTO `t_panduan` (`panduan_id`, `panduan_video`, `panduan_file`, `panduan_for`, `panduan_tanggal`) VALUES
 (1, 'iOUQEg9soWk', 'panduan_dosen.pdf', 'dosen', '2022-04-10'),
-(2, 'RRgqNM0_fsg', '', 'mahasiswa', '2022-04-10');
+(2, 'CO-zfGY0uM0', '', 'mahasiswa', '2022-04-13');
 
 -- --------------------------------------------------------
 
@@ -509,6 +509,7 @@ CREATE TABLE `t_peta` (
   `peta_user` text NOT NULL,
   `peta_kelas` text NOT NULL,
   `peta_isi` text NOT NULL,
+  `peta_file` text NOT NULL,
   `peta_tanggal` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -516,8 +517,8 @@ CREATE TABLE `t_peta` (
 -- Dumping data for table `t_peta`
 --
 
-INSERT INTO `t_peta` (`peta_id`, `peta_pelajaran`, `peta_user`, `peta_kelas`, `peta_isi`, `peta_tanggal`) VALUES
-(1, '1', '8', '1,2,3', '<p>edit</p>\r\n\r\n<p>&nbsp;</p>\r\n', '2022-03-26');
+INSERT INTO `t_peta` (`peta_id`, `peta_pelajaran`, `peta_user`, `peta_kelas`, `peta_isi`, `peta_file`, `peta_tanggal`) VALUES
+(1, '1', '8', '1,2,3', '<p>edit</p>\r\n\r\n<p>&nbsp;</p>\r\n', '038a12b6282ed466c9cbae812788788f.pdf', '2022-03-26');
 
 -- --------------------------------------------------------
 
@@ -690,6 +691,7 @@ CREATE TABLE `t_rencana` (
   `rencana_user` text NOT NULL,
   `rencana_kelas` text NOT NULL,
   `rencana_isi` text NOT NULL,
+  `rencana_file` text NOT NULL,
   `rencana_tanggal` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -697,8 +699,8 @@ CREATE TABLE `t_rencana` (
 -- Dumping data for table `t_rencana`
 --
 
-INSERT INTO `t_rencana` (`rencana_id`, `rencana_pelajaran`, `rencana_user`, `rencana_kelas`, `rencana_isi`, `rencana_tanggal`) VALUES
-(1, '1', '8', '1,2,3', '<p>edit</p>\r\n', '2022-03-26');
+INSERT INTO `t_rencana` (`rencana_id`, `rencana_pelajaran`, `rencana_user`, `rencana_kelas`, `rencana_isi`, `rencana_file`, `rencana_tanggal`) VALUES
+(1, '1', '8', '1,2,3', '<p>edit</p>\r\n', '8693bf317a49ab946d35246e963226c1.pdf', '2022-03-26');
 
 -- --------------------------------------------------------
 

@@ -512,11 +512,11 @@
 
         <?php endif ?>
 
-        <?php if ($this->session->userdata('level') > 1): ?>
+        <?php if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 3): ?>
 
         <li <?php echo @$panduan_mahasiswa; ?>>
           <a href="<?php echo base_url() ?>panduan/mahasiswa">
-            <div class="col-md-1 col-xs-1"><i class="material-icons"><?= ($this->session->userdata('level') == 2)?'control_point':'help' ?></i></div> <div class="col-md-5 col-xs-5"><span><?= ($this->session->userdata('level') == 2)?'Panduan Mahasiswa':'Panduan Pengguna' ?></span></div>
+            <div class="col-md-1 col-xs-1"><i class="material-icons"><?= ($this->session->userdata('level') == 1)?'control_point':'help' ?></i></div> <div class="col-md-5 col-xs-5"><span><?= ($this->session->userdata('level') == 1)?'Panduan Mahasiswa':'Panduan Pengguna' ?></span></div>
           </a>
         </li>
 

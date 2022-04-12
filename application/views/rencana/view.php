@@ -21,6 +21,24 @@
 
           <span><?php echo $data['rencana_isi']; ?></span>
 
+          <br/>
+
+          <?php if ($data['rencana_file'] != ''): ?>
+
+            <div style="background: #3c8dbc0d;padding: 2%;">
+              
+              <a href="<?php echo base_url('assets/materi/'.$data['rencana_file']) ?>" download>
+
+              <span style="position: absolute; margin-top: 60px; margin-left: 12px;" class="badge">Click to download file</span>
+
+              <img class="img img-thumbnail" width="150" src="<?php echo base_url('assets/gambar/file.png') ?>">
+
+              </a>
+
+            </div>
+
+          <?php endif ?>
+
         </div>
       </div>
       <!-- /.box -->

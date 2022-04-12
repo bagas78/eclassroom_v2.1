@@ -2,7 +2,7 @@
 class Panduan extends CI_Controller{
 
 	function __construct(){ 
-		parent::__construct();
+		parent::__construct(); 
 	} 
 	function index(){
 		if ( $this->session->userdata('login') == 1) {
@@ -34,7 +34,7 @@ class Panduan extends CI_Controller{
 
 			$level = $this->session->userdata('level');
 
-			if ($level == 2) {
+			if ($level == 1) {
 				$data['open'] = 1;
 			}else{
 				$data['open'] = 0;

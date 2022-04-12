@@ -2,7 +2,7 @@
 class Rencana extends CI_Controller{
  
 	function __construct(){
-		parent::__construct();
+		parent::__construct(); 
 	} 
 	function index(){
 		if ( $this->session->userdata('login') == 1) {
@@ -49,26 +49,84 @@ class Rencana extends CI_Controller{
 		$pelajaran = $this->session->userdata('pelajaran');
 		$user = $this->session->userdata('id');
 
-		$set = array(
-						'rencana_pelajaran' => $pelajaran,
-						'rencana_user' => $user,
-						'rencana_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['rencana_kelas'])),
-						'rencana_isi' => $_POST['rencana_isi'], 
-					);
+		if (@$_FILES['file']['name']) {
 
-		if ($this->query_builder->count("SELECT * FROM t_rencana WHERE rencana_pelajaran = '$pelajaran'")) {
-			// edit
-			$where = ['rencana_pelajaran' => $pelajaran];
-			$db = $this->query_builder->update('t_rencana',$set,$where);
+			//type file
+			$typefile = explode('/', $_FILES['file']['type']);
+
+			//replace Karakter name foto
+			$filename = $_FILES['file']['name'];
+
+			//replace name foto
+			$type = explode(".", $filename);
+	    	$no = count($type) - 1;
+	    	$new_name = md5(time()).'.'.$type[$no];
+	    	/////////////////////
+			
+			// exist file
+			  $config = array(
+			  'upload_path' 	=> './assets/img/rencana',
+			  'allowed_types' 	=> "doc|docx|pdf|txt|xlsx",
+			  'overwrite' 		=> TRUE,
+			  'max_size' 		=> "10000",
+			  'file_name'		=> $new_name,
+			  );
+
+	          //Load upload library
+	          $this->load->library('upload',$config);
+
+			if ($this->upload->do_upload('file')) {
+
+				$set = array(
+								'rencana_pelajaran' => $pelajaran,
+								'rencana_user' => $user,
+								'rencana_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['rencana_kelas'])),
+								'rencana_isi' => $_POST['rencana_isi'], 
+								'rencana_file' => $new_name,
+							);
+
+				if ($this->query_builder->count("SELECT * FROM t_rencana WHERE rencana_pelajaran = '$pelajaran'")) {
+					// edit
+					$where = ['rencana_pelajaran' => $pelajaran];
+					$db = $this->query_builder->update('t_rencana',$set,$where);
+				} else {
+					// insert
+					$db = $this->query_builder->add('t_rencana',$set);
+				}
+
+				if ($db == 1) {
+					$this->session->set_flashdata('success','Data berhasil di tambah');
+				}else{
+					$this->session->set_flashdata('gagal','Data gagal di tambah');
+				}
+			
+			}else{
+				$this->session->set_flashdata('gagal','Periksa kembali file');
+			}
+
 		} else {
-			// insert
-			$db = $this->query_builder->add('t_rencana',$set);
-		}
 
-		if ($db == 1) {
-			$this->session->set_flashdata('success','Data berhasil di tambah');
-		}else{
-			$this->session->set_flashdata('gagal','Data gagal di tambah');
+			$set = array(
+							'rencana_pelajaran' => $pelajaran,
+							'rencana_user' => $user,
+							'rencana_kelas' => str_replace(['"','[',']'], '', json_encode($_POST['rencana_kelas'])),
+							'rencana_isi' => $_POST['rencana_isi'], 
+						);
+
+			if ($this->query_builder->count("SELECT * FROM t_rencana WHERE rencana_pelajaran = '$pelajaran'")) {
+				// edit
+				$where = ['rencana_pelajaran' => $pelajaran];
+				$db = $this->query_builder->update('t_rencana',$set,$where);
+			} else {
+				// insert
+				$db = $this->query_builder->add('t_rencana',$set);
+			}
+
+			if ($db == 1) {
+				$this->session->set_flashdata('success','Data berhasil di tambah');
+			}else{
+				$this->session->set_flashdata('gagal','Data gagal di tambah');
+			}
 		}
 
 		redirect(base_url('rencana'));
