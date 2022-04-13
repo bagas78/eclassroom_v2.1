@@ -27,7 +27,7 @@
 
             <div style="background: #3c8dbc0d;padding: 2%;">
               
-              <a href="<?php echo base_url('assets/materi/'.$data['rencana_file']) ?>" download>
+              <a href="<?php echo base_url('assets/img/rencana/'.$data['rencana_file']) ?>" download>
 
               <span style="position: absolute; margin-top: 60px; margin-left: 12px;" class="badge">Click to download file</span>
 
