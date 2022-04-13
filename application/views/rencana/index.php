@@ -48,7 +48,7 @@
 
               <a href="#" onclick="del_file('<?php echo $data['rencana_id'] ?>','<?php echo $data['rencana_file'] ?>')" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
 
-              <a href="<?php echo base_url('assets/materi/'.$data['rencana_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
+              <a href="<?php echo base_url('assets/img/rencana/'.$data['rencana_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
 
             <?php endif ?>
 

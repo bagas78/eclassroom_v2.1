@@ -48,7 +48,7 @@
 
               <a href="#" onclick="del_file('<?php echo $data['peta_id'] ?>','<?php echo $data['peta_file'] ?>')" style="color: #dd4b39; font-size: 20px; margin-left: 1%;"><i class="fa fa-times"></i></a>
 
-              <a href="<?php echo base_url('assets/materi/'.$data['peta_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
+              <a href="<?php echo base_url('assets/img/peta/'.$data['peta_file']) ?>" download style="color: #00a65a; font-size: 20px; margin-left: 1%;"><i class="fa fa-download"></i></a>
 
             <?php endif ?>
 
