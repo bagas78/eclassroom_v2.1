@@ -18,7 +18,7 @@
           <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Pelajaran</th>
+                  <th>Mata kuliah</th>
                   <th width="1">Action</th>
                 </tr>
                 </thead>

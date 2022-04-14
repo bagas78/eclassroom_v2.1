@@ -11,7 +11,7 @@ class Profile extends CI_Controller{
 
 			$db = $this->db->query("SELECT * FROM t_user WHERE user_id = '$id'")->row_array();
 
-			$data['data'] = array(
+			$data['data'] = array( 
 									'nama' => $db['user_name'],
 									'ttl' => $db['user_ttl'],
 									'nohp' => $db['user_nohp'],
@@ -34,12 +34,21 @@ class Profile extends CI_Controller{
 	}
 	function update($id){
 		$level = $this->session->userdata('level');
+		$nama = $_POST['nama'];
 
 		if (@$_FILES['foto']['name']) {
 
-			$cut = strlen($_FILES['foto']['name']) - 3;
-			$type = substr($_FILES['foto']['name'], $cut);
-			$nama = $_POST['nama'];
+			//type file
+			$typefile = explode('/', $_FILES['foto']['type']);
+
+			//replace Karakter name foto
+			$filename = $_FILES['foto']['name'];
+
+			//replace name foto
+			$type = explode(".", $filename);
+	    	$no = count($type) - 1;
+	    	$new_name = md5(time()).'.'.$type[$no];
+	    	/////////////////////
 
 		 	//config uplod foto
 			  $config = array(
@@ -47,7 +56,7 @@ class Profile extends CI_Controller{
 			  'allowed_types' 	=> "gif|jpg|png|jpeg",
 			  'overwrite' 		=> TRUE,
 			  'max_size' 		=> "2000",
-			  'file_name'		=> $nama.'_'.$id,
+			  'file_name'		=> $new_name,
 			  );
 
 	          //Load upload library
@@ -62,7 +71,7 @@ class Profile extends CI_Controller{
 								'user_email' => $_POST['email'],
 								'user_alamat' => $_POST['alamat'],
 								'user_biodata' => $_POST['biodata'],
-								'user_foto' => $nama.'_'.$id.'.'.$type,
+								'user_foto' => $new_name,
 								'user_tanggal' => date('Y-m-d'),
 							);
 

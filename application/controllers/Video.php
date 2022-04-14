@@ -15,7 +15,7 @@ class Video extends CI_Controller{
 				case '1':
 					// admin 
 					$data['data'] = $this->query_builder->view("SELECT * FROM t_album as a JOIN t_pelajaran as b ON a.album_pelajaran = b.pelajaran_id WHERE a.album_jenis = 'video' AND a.album_hapus = 0 order by a.album_id desc");
-					break;
+					break; 
 				
 				case '2':
 					// guru
@@ -136,8 +136,10 @@ class Video extends CI_Controller{
 	function edit($id,$album,$name){
 
         //hilangkan link
-        $preg = substr($data['video_link'], 0, strpos($data['video_link'], "="));
-        $replace_link = str_replace($preg.'=', '', $data['video_link']);
+        $preg = substr($_POST['video_link'], 0, strpos($_POST['video_link'], "="));
+        $replace_link = str_replace($preg.'=', '', $_POST['video_link']);
+
+        print_r($replace_link);
 
         $set = array(
 	 				'video_judul' => $_POST['video_judul'],

@@ -66,8 +66,8 @@
             
             <div class="nav-tabs-custom" style="margin-bottom: 0;">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#siswa" data-toggle="tab">Siswa</a></li>
-                <li><a href="#guru" data-toggle="tab">Guru</a></li>
+                <li class="active"><a href="#siswa" data-toggle="tab">Mahasiswa</a></li>
+                <li><a href="#guru" data-toggle="tab">Dosen</a></li>
               </ul>
               <div class="tab-content" style="margin-top: 20px;">
                 <div class="active  tab-pane" id="siswa">
@@ -110,11 +110,11 @@
 
                     <?php if ($guru['user_level'] == 2): ?>
 
-                      <div onclick="room(<?php echo $guru['user_id'] ?>,'group')" class="col-md-2 col-xs-3">
+                      <div onclick="room(<?php echo $guru['user_id'] ?>,'personal')" class="col-md-2 col-xs-3">
 
                        <?php if ($guru['user_foto']): ?>
 
-                        <img class="img img-circle" width="50" height="50" src="<?php echo base_url('assets/gambar/user/'.$siswa['user_foto']) ?>">
+                        <img class="img img-circle" width="50" height="50" src="<?php echo base_url('assets/gambar/user/'.$guru['user_foto']) ?>">
 
                        <?php else: ?>
 

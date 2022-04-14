@@ -54,7 +54,7 @@
 
                   <?php endif ?>
 
-                  <div <?= ($ok == 'ok'.$i)?'class="col-md-9 row"':'class="col-md-12 row"' ?>>
+                  <div <?= (@$ok == 'ok'.$i)?'class="col-md-9 row"':'class="col-md-12 row"' ?>>
                     <span><?php echo $data['soal'.$i] ?></span>
                   </div>
 

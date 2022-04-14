@@ -13,10 +13,11 @@ class Panduan extends CI_Controller{
 				$data['open'] = 1;
 			}else{
 				$data['open'] = 0;
-			}
+			} 
 
 		    $data['title'] = 'Panduan Pengguna';
 		    $data['panduan'] = 'class="active"';
+		    
 		    $data['data'] = $this->query_builder->view_row("SELECT * FROM t_panduan WHERE panduan_for = 'dosen'");
 		    $data['for'] = 'dosen';
 
