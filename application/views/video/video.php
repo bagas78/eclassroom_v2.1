@@ -9,7 +9,11 @@
               <a href="<?php echo base_url('video') ?>">
                 <button class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</button>
               </a>
-              <button class="btn btn-default" data-toggle="modal" data-target="#modal-galery"><i class="fa fa-plus"></i> Tambah Video</button>
+
+              <?php if ($this->session->userdata('level') < 3): ?>
+                <button class="btn btn-default" data-toggle="modal" data-target="#modal-galery"><i class="fa fa-plus"></i> Tambah Video</button>  
+              <?php endif ?>
+              
             </div>
 
           <div class="box-tools pull-right">
@@ -39,6 +43,9 @@
                          <iframe style="width: 100%;" height="315" src="https://www.youtube.com/embed/<?php echo $key['video_link'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                          
                       </div>
+
+                      <?php if ($this->session->userdata('level') < 3): ?>
+
                       <div class="modal-footer">
                         <form method="POST" action="<?php echo base_url() ?>video/edit/<?php echo $key['video_id']; ?>/<?php echo $key['video_album'] ?>/<?php echo $title ?>">
                           <div class="form-group">
@@ -52,6 +59,9 @@
                           <a onclick="del('<?php echo base_url('video/delete/'.$key['video_id'].'/'. $key['video_album'].'/'.$title) ?>')"><button class="btn btn-default" type="button">Delete <i class="fa fa-times"></i></button></a>
                          </form>
                       </div>
+
+                      <?php endif ?>
+                      
                     </div>
                   </div>
                  </div>
