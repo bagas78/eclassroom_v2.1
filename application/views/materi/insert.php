@@ -5,7 +5,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-
+ 
           <div align="left"> 
             <a href="<?php echo base_url('materi') ?>"><button class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</button></a>
           </div>
@@ -34,6 +34,9 @@
                     <option value="<?php echo $pelajaran['pelajaran_id'] ?>"><?php echo $pelajaran['pelajaran_nama'] ?></option>
                   <?php endforeach ?>
                 </select>
+
+                <span hidden="" id="pelajaran-alert" class="small text-danger">* Pelajaran telah di hapus, hubungi admin untuk merubah</span>
+
               </div> 
               <div class="form-group col-md-6">
                 <label>Kelas</label>
@@ -67,13 +70,19 @@
 
 <script type="text/javascript">
   <?php if ($this->session->userdata('level') == 2): ?>
-    
+
+    var l = $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>');
+
     $('#pelajaran').attr('readonly', true);
-    $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
 
     $('#pelajaran').change(function() {
-      $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
-    });
+      l.val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
+    }); 
+
+    if (l.val() == null) {
+     $('#pelajaran-alert').removeAttr('hidden',true); 
+    }
+    
 
   <?php endif ?>
 </script>

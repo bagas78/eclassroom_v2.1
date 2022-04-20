@@ -75,8 +75,17 @@
                                     <option value="<?php echo $pelajaran['pelajaran_id'] ?>"><?php echo $pelajaran['pelajaran_nama'] ?></option>
                                   <?php endforeach ?>
                                 </select>
+                                
+                                <span hidden="" id="pelajaran-alert<?php echo $key['user_id']; ?>" class="small text-danger">* Pelajaran yang di pilih telah di hapus</span>
+
                                 <script type="text/javascript">
-                                  $('#pelajaran<?php echo $key['user_id']; ?>').val('<?php echo $key['user_pelajaran']; ?>').change();
+                                  var l = $('#pelajaran<?php echo $key['user_id']; ?>').val('<?php echo $key['user_pelajaran']; ?>');
+
+                                  if (l.val() != null) {
+                                    l.change();
+                                  }else{
+                                    $('#pelajaran-alert<?php echo $key['user_id']; ?>').removeAttr('hidden',true);
+                                  }
                                 </script>
                               </div>
                             </div>

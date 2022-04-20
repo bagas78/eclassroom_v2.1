@@ -4,7 +4,7 @@
     <section class="content"> 
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box"> 
         <div class="box-header with-border">
 
           <?php if ($this->session->userdata('level') < 3): ?>
@@ -62,7 +62,7 @@
                     <td style="width: 50px;">
                       <div style="width: 50px;">
 
-                      <a href="<?php echo base_url('latihan/koreksi_detail/').$key['latihan_id'] ?>"><button class="btn btn-xs btn-default"><i class="<?=($this->session->userdata('level') < 3)?'fa fa-pencil':'fa fa-eye' ?>"></i></button></a>
+                      <a href="<?php echo base_url('latihan/koreksi_detail/').$key['latihan_hasil_id'].'/'.$key['latihan_id'] ?>"><button class="btn btn-xs btn-default"><i class="<?=($this->session->userdata('level') < 3)?'fa fa-pencil':'fa fa-eye' ?>"></i></button></a>
 
                       <?php if ($this->session->userdata('level') < 3): ?>
                         

@@ -37,7 +37,7 @@
                     <td style="width: 50px;">
                       <div>
                       <button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-edit<?php echo $key['kelas_id'] ?>"><i class="fa fa-edit"></i></button>
-                      <!-- <button onclick="del('<?php echo base_url() ?>kelas/delete/<?php echo $key['kelas_id'] ?>')" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></button> -->
+                      <button onclick="del('<?php echo base_url() ?>kelas/delete/<?php echo $key['kelas_id'] ?>')" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></button>
 
                       </div>
                     </td>

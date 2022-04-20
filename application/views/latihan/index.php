@@ -2,7 +2,7 @@
     <!-- Main content --> 
     <section class="content"> 
  
-      <!-- Default box -->  
+      <!-- Default box -->   
       <div class="box">
         <div class="box-header with-border">
         
@@ -129,6 +129,9 @@
                       <option value="<?php echo $key['pelajaran_id'] ?>"><?php echo $key['pelajaran_nama'] ?></option>
                     <?php endforeach ?>
                   </select>
+
+                  <span hidden="" id="pelajaran-alert" class="small text-danger">* Pelajaran telah di hapus, hubungi admin untuk merubah</span>
+                  
                 </div>
               </div>
               <!-- /.box-body -->
@@ -150,12 +153,17 @@
   <script type="text/javascript">
     <?php if ($this->session->userdata('level') == 2): ?>
       
+      var l = $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>');
+
       $('#pelajaran').attr('readonly', true);
-      $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
 
       $('#pelajaran').change(function() {
-      $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
-      });
+        l.val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
+      }); 
+
+      if (l.val() == null) {
+       $('#pelajaran-alert').removeAttr('hidden',true); 
+      }
 
     <?php endif ?>
 

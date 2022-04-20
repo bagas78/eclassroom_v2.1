@@ -9,7 +9,7 @@
       </div>
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box"> 
         
         <div class="box-body">
          
@@ -71,6 +71,8 @@
                   <input type="hidden" name="jumlah" value="<?php echo $jum ?>">
 
                   <input style="margin-top: 1%;" type="number" name="nilai<?php echo $i ?>" class="form-control" placeholder="Nilai" value="<?php echo @$nilai['nilai'.$i] ?>">
+
+                  <textarea placeholder="Komentar / Saran" style="margin-top: 1%;" class="form-control" name="saran<?php echo $i ?>"><?php echo @$nilai['saran'.$i] ?></textarea>
 
                 </div>
 

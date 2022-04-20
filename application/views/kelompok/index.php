@@ -2,7 +2,7 @@
     <!-- Main content --> 
     <section class="content">
 
-      <!-- Default box -->
+      <!-- Default box --> 
       <div class="box"> 
         <div class="box-header with-border">
 
@@ -70,8 +70,16 @@
                                 <?php endforeach ?>
                               </select>
 
+                              <span hidden="" id="kelas-alert<?php echo $key['kelompok_id']; ?>" class="small text-danger">* Kelas yang di pilih telah di hapus</span>
+
                               <script type="text/javascript">
-                                $('#kelas<?php echo $key['kelompok_id'] ?>').val(<?php echo $key['kelompok_kelas']; ?>).change();
+                                var l = $('#kelas<?php echo $key['kelompok_id'] ?>').val(<?php echo $key['kelompok_kelas']; ?>);
+
+                                if (l.val() != null) {
+                                  l.change();
+                                }else{
+                                  $('#kelas-alert<?php echo $key['kelompok_id']; ?>').removeAttr('hidden',true);
+                                }
                               </script>
 
                             </div>

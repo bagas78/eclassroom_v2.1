@@ -1,7 +1,7 @@
 
     <!-- Main content --> 
     <section class="content">
-
+ 
       <!-- Default box --> 
       <div class="box">
         <div class="box-header with-border">
@@ -26,6 +26,12 @@
             <input type="hidden" name="ujian_essay_id" value="<?php echo $data['ujian_essay_id'] ?>">
 
             <div class="row">
+
+              <div class="form-group col-md-6">
+                <label>Materi</label>
+                <input required="" type="text" name="ujian_essay_judul" class="form-control" value="<?php echo $data['ujian_essay_judul'] ?>">
+              </div>
+
               <div class="form-group col-md-6"> 
                 <label>Mata Kuliah</label>
                 <select id="pelajaran" required="" name="ujian_essay_pelajaran" class="form-control">
@@ -35,12 +41,14 @@
                   <?php endforeach ?>
                 </select>
 
+                <span hidden="" id="pelajaran-alert" class="small text-danger">* Pelajaran telah di hapus, hubungi admin untuk merubah</span>
+
                 <script type="text/javascript">
                   $('#pelajaran').val('<?php echo $data['ujian_essay_pelajaran'] ?>').change();
                 </script>
 
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label>Kelas</label>
                 <select id="kelas" name="ujian_essay_kelas[]" class="form-control select2" multiple="multiple" data-placeholder="-- Pilih --"
                         style="width: 100%;">
@@ -55,15 +63,12 @@
 
               </div>
 
-            </div>
-
-            <div class="row">
-              <div class="form-group col-md-4">
+            <div class="form-group col-md-4">
               <label>Tanggal & Jam</label>
               <input required="" type="datetime-local" name="ujian_essay_pelaksanaan" value="<?php echo $data['ujian_essay_pelaksanaan'] ?>" class="form-control"> 
-              </div>
+            </div>
             
-              <div class="form-group col-md-4">
+              <!-- <div class="form-group col-md-4">
                 <label>Materi</label>
                 <select id="materi" class="form-control" required="" name="ujian_essay_materi">
                   <option value="" hidden="">-- Pilih --</option>
@@ -76,7 +81,7 @@
                   $('#materi').val(<?php echo $data['ujian_essay_materi'] ?>).change();
                 </script>
 
-                </div>
+                </div> -->
                 <div class="form-group col-md-4">
                 <label>Durasi</label>
                 <input required="" type="number" name="ujian_essay_durasi" class="form-control" value="<?php echo $data['ujian_essay_durasi'] ?>"> 
@@ -131,12 +136,18 @@
 <script type="text/javascript">
   <?php if ($this->session->userdata('level') == 2): ?>
     
+    var l = $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>');
+
     $('#pelajaran').attr('readonly', true);
-    $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
 
     $('#pelajaran').change(function() {
-      $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
-    });
+      l.val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
+    }); 
+
+    if (l.val() == null) {
+     $('#pelajaran-alert').removeAttr('hidden',true); 
+    }
+
 
   <?php endif ?>
 </script>

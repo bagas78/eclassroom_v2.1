@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller{
 				case '1':
 					// admin
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_hapus = 0");
-					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_hapus = 0");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_latihan WHERE latihan_hapus = 0");
 					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE modul_hapus = 0");
 					$num_video = $this->query_builder->count("SELECT * FROM t_video WHERE video_hapus = 0");
 
@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller{
 				case '2':
 					// guru
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE materi_pelajaran = '$ses_pelajaran' AND materi_hapus = 0");
-					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE assigment_pelajaran = '$ses_pelajaran' AND assigment_hapus = 0");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_latihan WHERE latihan_pelajaran = '$ses_pelajaran' AND latihan_hapus = 0");
 					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE modul_pelajaran = '$ses_pelajaran' AND modul_hapus = 0");
 					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE a.album_pelajaran = '$ses_pelajaran' AND b.video_hapus = 0");
 
@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller{
 				case '3':
 					// siswa
 					$num_materi = $this->query_builder->count("SELECT * FROM t_materi WHERE FIND_IN_SET('$ses_kelas', materi_kelas)");
-					$num_latihan = $this->query_builder->count("SELECT * FROM t_assigment WHERE FIND_IN_SET('$ses_kelas', assigment_kelas) AND assigment_hapus = 0");
+					$num_latihan = $this->query_builder->count("SELECT * FROM t_latihan WHERE FIND_IN_SET('$ses_kelas', latihan_kelas) AND latihan_hapus = 0");
 					$num_modul = $this->query_builder->count("SELECT * FROM t_modul WHERE FIND_IN_SET('$ses_kelas', modul_kelas) AND modul_hapus = 0");
 					$num_video = $this->query_builder->count("SELECT * FROM t_album AS a JOIN t_video AS b ON a.album_id = b.video_album WHERE FIND_IN_SET('$ses_kelas', a.album_kelas) AND video_hapus = 0");
 

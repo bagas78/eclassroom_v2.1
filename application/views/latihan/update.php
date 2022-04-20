@@ -8,7 +8,7 @@
     background: ghostwhite; 
     font-size: 12px;
   }
-</style>
+</style> 
 
 
     <!-- Main content --> 
@@ -51,8 +51,16 @@
                   <?php endforeach ?>
                 </select>
 
+                <span hidden="" id="pelajaran-alert" class="small text-danger">* Pelajaran telah di hapus, hubungi admin untuk merubah</span>
+
                 <script type="text/javascript">
-                  $('#pelajaran').val('<?php echo $data['latihan_pelajaran'] ?>').change();
+                  var l = $('#pelajaran').val('<?php echo $data['latihan_pelajaran']; ?>');
+
+                  if (l.val() != null) {
+                    l.change();
+                  }else{
+                    $('#pelajaran-alert').removeAttr('hidden',true);
+                  }
                 </script>
 
               </div>
@@ -163,12 +171,17 @@
 <script type="text/javascript">
   <?php if ($this->session->userdata('level') == 2): ?>
     
+    var l = $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>');
+
     $('#pelajaran').attr('readonly', true);
-    $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
 
     $('#pelajaran').change(function() {
-      $('#pelajaran').val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
-    });
+      l.val('<?php echo $this->session->userdata('pelajaran'); ?>').change();
+    }); 
+
+    if (l.val() == null) {
+     $('#pelajaran-alert').removeAttr('hidden',true); 
+    }
 
   <?php endif ?>
 </script>

@@ -4,7 +4,7 @@
 
       <!-- Default box --> 
       <div class="box"> 
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
  
             <div align="left">
               <button class="btn btn-default" data-toggle="modal" data-target="#modal-album"><i class="fa fa-plus"></i> Tambah</button>
@@ -75,8 +75,17 @@
                                     <option value="<?php echo @$kelas['kelas_id'] ?>"><?php echo @$kelas['kelas_nama'] ?></option>
                                   <?php endforeach ?>
                                 </select>
+
+                                <span hidden="" id="kelas-alert<?php echo $key['user_id']; ?>" class="small text-danger">* Kelas yang di pilih telah di hapus</span>
+
                                 <script type="text/javascript">
-                                  $('#kelas<?php echo $key['user_id'] ?>').val('<?php echo $key['user_kelas'] ?>').change();
+                                  var l = $('#kelas<?php echo $key['user_id'] ?>').val('<?php echo $key['user_kelas'] ?>');
+
+                                  if (l.val() != null) {
+                                    l.change();
+                                  }else{
+                                    $('#kelas-alert<?php echo $key['user_id']; ?>').removeAttr('hidden',true);
+                                  }
                                 </script>
                               </div>
                               <div class="form-group">

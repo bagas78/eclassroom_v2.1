@@ -17,7 +17,7 @@ class Latihan extends CI_Controller{
 		$tgl = date('Y-m-d');
 
 		switch ($level) { 
-			case 1: 
+			case 1:  
 				// admin
 				$data['data'] = $this->query_builder->view("SELECT * FROM t_latihan as a JOIN t_pelajaran as b ON a.latihan_pelajaran = b.pelajaran_id JOIN t_kelas as c ON a.latihan_kelas = c.kelas_id WHERE a.latihan_hapus = 0");
 				break;
@@ -401,7 +401,7 @@ class Latihan extends CI_Controller{
 
 		redirect(base_url('latihan/koreksi'));
 	}
-	function koreksi_detail($id){
+	function koreksi_detail($id,$soal){
 		if ( $this->session->userdata('login') == 1) {
 
 		  $data['open_latihan'] = 'menu-open'; 
@@ -410,7 +410,7 @@ class Latihan extends CI_Controller{
 				
 			$data['title'] = 'Koreksi Assigment';
 
-			$db = $this->query_builder->view_row("SELECT * FROM t_latihan as a JOIN t_latihan_hasil as b ON a.latihan_id = b.latihan_hasil_soal WHERE a.latihan_id = '$id'");
+			$db = $this->query_builder->view_row("SELECT * FROM t_latihan as a JOIN t_latihan_hasil as b ON a.latihan_id = b.latihan_hasil_soal WHERE a.latihan_id = '$soal' AND b.latihan_hasil_id = '$id'");
 
 			if ($this->session->userdata('level') < 3) {
 				// admin & guru

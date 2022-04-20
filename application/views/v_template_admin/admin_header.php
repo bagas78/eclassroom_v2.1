@@ -8,7 +8,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 --> 
-  <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">   
   <!-- Font Awesome --> 
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->  
@@ -170,7 +170,14 @@
           
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->userdata('name'); ?></p>
+          <p><?php 
+              $n = $this->session->userdata('name'); 
+              if (strlen($n) > 22) {
+                echo substr($n,0,22).' ...';
+              } else {
+                echo substr($n,0,22);
+              } ?>    
+          </p>
           <a><i class="fa fa-user text-danger"></i> 
           <?php switch ($this->session->userdata('level')) {
             case 1:
