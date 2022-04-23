@@ -70,9 +70,9 @@
 
                   <input type="hidden" name="jumlah" value="<?php echo $jum ?>">
 
-                  <input style="margin-top: 1%;" type="number" name="nilai<?php echo $i ?>" class="form-control" placeholder="Nilai" value="<?php echo @$nilai['nilai'.$i] ?>">
+                  <input <?= ($this->session->userdata('level') == 3)?'readonly':'' ?> style="margin-top: 1%;" type="number" name="nilai<?php echo $i ?>" class="form-control" placeholder="Nilai" value="<?php echo @$nilai['nilai'.$i] ?>">
 
-                  <textarea placeholder="Komentar / Saran" style="margin-top: 1%;" class="form-control" name="saran<?php echo $i ?>"><?php echo @$nilai['saran'.$i] ?></textarea>
+                  <textarea <?= ($this->session->userdata('level') == 3)?'readonly':'' ?> placeholder="Komentar / Saran" style="margin-top: 1%;" class="form-control" name="saran<?php echo $i ?>"><?php echo @$nilai['saran'.$i] ?></textarea>
 
                 </div>
 
