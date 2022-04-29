@@ -44,6 +44,8 @@
   <!-- jQuery 3 -->
   <script src="<?php echo base_url() ?>adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
 
+  <script src="<?php echo base_url() ?>adminLTE/bower_components/ckeditor/ckeditor.js"></script>
+
 
 <style type="text/css">
   ::-webkit-scrollbar {

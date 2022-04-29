@@ -4,7 +4,7 @@ class Latihan extends CI_Controller{
 	function __construct(){ 
 		parent::__construct();  
 	}  
-	function index(){ 
+	function index(){  
 		if ( $this->session->userdata('login') == 1) {
 		
 		$data['open_latihan'] = 'menu-open'; 
@@ -409,6 +409,7 @@ class Latihan extends CI_Controller{
 	  	  $data['latihan_koreksi_active'] = 'class="active"';
 				
 			$data['title'] = 'Koreksi Assigment';
+			$data['soal'] = $soal;
 
 			$db = $this->query_builder->view_row("SELECT * FROM t_latihan as a JOIN t_latihan_hasil as b ON a.latihan_id = b.latihan_hasil_soal WHERE a.latihan_id = '$soal' AND b.latihan_hasil_id = '$id'");
 
@@ -463,19 +464,39 @@ class Latihan extends CI_Controller{
 	function koreksi_send($id){
 
 		$userid = $this->session->userdata('id');
+		$path = 'assets/img/latihan';
+		$soal = $_POST['soal'];
 
 		//jumlah nilai
 		$jum = $_POST['jumlah'];
 		$sum = 0;
+
+		$arr = [];
 		for ($i=1; $i < $jum+1; $i++){
+			//jumlah latihan
 			$sum += $_POST['nilai'.$i];
+
+			//unggah file koreksi
+			$typefile = explode('/', $_FILES['koreksi'.$i]['type']);
+			$filename = $_FILES['koreksi'.$i]['name'];
+			$type = explode(".", $filename);
+			$no = count($type) - 1;
+			$name_file = $soal.'_'.$i.'_koreksi.'.$type[$no];
+
+			move_uploaded_file($_FILES['koreksi'.$i]['tmp_name'], $path.'/'.$name_file);
+
+			if ($filename) {
+				$arr += array('koreksi'.$i.'_file' => $name_file);
+			}
 		}
+
+		$merge = array_merge($_POST, $arr);
 		//
 
 		$set = array(
-						'latihan_hasil_nilai' => json_encode($_POST),
+						'latihan_hasil_nilai' => json_encode($merge),
 						'latihan_hasil_nilai_total' => $sum,
-						'latihan_hasil_pengkoreksi' => $userid, 
+						'latihan_hasil_pengkoreksi' => $userid,
 					);
 
 		$where = ['latihan_hasil_id' => $id];

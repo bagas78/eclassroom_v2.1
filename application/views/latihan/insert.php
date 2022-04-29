@@ -17,7 +17,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-
+ 
           <div align="left"> 
             <a href="<?php echo base_url('latihan') ?>"><button class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</button></a>
           </div>
@@ -105,7 +105,13 @@
                 <div class="col-md-1 col-xs-1" style="width: 0;"><?php echo $i.'.'; ?></div>
                 <div class="col-md-11 col-xs-11">
 
-                  <textarea name="soal<?php echo $i ?>" class="form-control" style="height: 120px;"></textarea>
+                  <textarea id="edit<?php echo $i ?>" name="soal<?php echo $i ?>" class="form-control" style="height: 120px;"></textarea>
+
+                  <script type="text/javascript">
+                    CKEDITOR.replace('edit<?php echo $i ?>', {
+                        height: '200px'
+                    });
+                  </script>
 
                   <div class="col-md-6 col-xs-6">
                     <label class="custom" for="gambar"><i class="fa fa-camera"></i> Upload gambar</label>

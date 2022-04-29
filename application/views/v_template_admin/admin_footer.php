@@ -57,8 +57,6 @@
 <!-- Select2 -->
 <script src="<?php echo base_url() ?>adminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
 
-<script src="<?php echo base_url() ?>adminLTE/bower_components/ckeditor/ckeditor.js"></script>
-
 <script src="<?php echo base_url('assets/') ?>sweetalert/sweet-alert.js"></script>
 
 <script>

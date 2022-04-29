@@ -14,7 +14,7 @@
         <div class="box-body">
          
           <form method="POST" action="<?php echo base_url('latihan/koreksi_send/'.$id) ?>" enctype="multipart/form-data">
-
+ 
             <?php $jum = $data['latihan_jumlah']; ?>
 
             <?php for ($i=1; $i < $jum+1; $i++):?>
@@ -66,9 +66,27 @@
 
                     <?php endif ?>
 
+                    <?php if ($this->session->userdata('level') == 2): ?>
+                        
+                      <div class="clearfix"></div><br/>
+
+                      <div class="form-group">
+                        <small>Upload file koreksi</small>
+                        <input style="margin-top: 1%;" type="file" name="koreksi<?php echo $i ?>" class="form-control">
+                      </div>
+                    
+                    <?php endif ?>
+
+                  <?php endif ?>
+
+                  <?php if (file_exists('./assets/img/latihan/'.$nilai['koreksi'.$i.'_file'])): ?>
+                    
+                    <a href="<?php echo base_url('assets/img/latihan/').@$nilai['koreksi'.$i.'_file'] ?>" download><button style="margin-top: 1%;" type="button" class="btn btn-default btn-xs">Download hasil koreksi <i class="fa fa-download"></i></button></a>
+
                   <?php endif ?>
 
                   <input type="hidden" name="jumlah" value="<?php echo $jum ?>">
+                  <input type="hidden" name="soal" value="<?php echo $soal ?>">
 
                   <input <?= ($this->session->userdata('level') == 3)?'readonly':'' ?> style="margin-top: 1%;" type="number" name="nilai<?php echo $i ?>" class="form-control" placeholder="Nilai" value="<?php echo @$nilai['nilai'.$i] ?>">
 

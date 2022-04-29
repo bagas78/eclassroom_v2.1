@@ -116,7 +116,13 @@
                 <div class="col-md-1 col-xs-1" style="width: 0;"><?php echo $i.'.'; ?></div>
                 <div class="col-md-11 col-xs-11">
 
-                  <textarea name="soal<?php echo $i ?>" class="form-control" style="height: 120px;"><?php echo $data['soal'.$i] ?></textarea>
+                  <textarea id="edit<?php echo $i ?>" name="soal<?php echo $i ?>" class="form-control" style="height: 120px;"><?php echo $data['soal'.$i] ?></textarea>
+
+                  <script type="text/javascript">
+                    CKEDITOR.replace('edit<?php echo $i ?>', {
+                        height: '200px'
+                    });
+                  </script>
 
                   <div class="col-md-6 col-xs-6">
                     <label class="custom" for="gambar"><i class="fa fa-camera"></i> Upload gambar</label>
