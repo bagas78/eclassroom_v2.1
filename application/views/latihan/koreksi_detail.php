@@ -79,9 +79,13 @@
 
                   <?php endif ?>
 
-                  <?php if (file_exists('./assets/img/latihan/'.$nilai['koreksi'.$i.'_file'])): ?>
+                  <?php if (file_exists('./assets/img/latihan/'.@$nilai['koreksi'.$i.'_file'])): ?>
                     
+                    <?php if ($this->session->userdata('level') == 3): ?>
+                      
                     <a href="<?php echo base_url('assets/img/latihan/').@$nilai['koreksi'.$i.'_file'] ?>" download><button style="margin-top: 1%;" type="button" class="btn btn-default btn-xs">Download hasil koreksi <i class="fa fa-download"></i></button></a>
+
+                    <?php endif ?>
 
                   <?php endif ?>
 
