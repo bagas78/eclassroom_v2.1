@@ -312,7 +312,7 @@
   
     setTimeout(function() {
       newchat();
-    }, 1000);
+    }, 10000);
 
   }
 
