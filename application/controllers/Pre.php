@@ -17,7 +17,7 @@ class Pre extends CI_Controller{
 
 			switch ($level) {  
 				case 1: 
-					// admin 
+					// admin  
 					$data['data'] = $this->query_builder->view("SELECT * FROM t_pre as a JOIN t_pelajaran as b ON a.pre_pelajaran = b.pelajaran_id WHERE a.pre_hapus = 0");
 					break;
 				case 2:
@@ -362,7 +362,7 @@ class Pre extends CI_Controller{
 						break;
 					case '3':
 						// mahasiswa
-						$data['data'] = $this->query_builder->view("SELECT * FROM t_pre_hasil as a join t_pre as b ON a.pre_hasil_soal = b.pre_id join t_user as c ON c.user_id = a.pre_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.pre_hasil_hapus = 0 AND concat(',',b.pre_kelas,',') LIKE '%,$kelas,%'");
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_pre_hasil as a join t_pre as b ON a.pre_hasil_soal = b.pre_id join t_user as c ON c.user_id = a.pre_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.pre_hasil_hapus = 0 AND concat(',',b.pre_kelas,',') LIKE '%,$kelas,%' AND a.pre_hasil_siswa = '$id'");
 							
 						break;
 				}

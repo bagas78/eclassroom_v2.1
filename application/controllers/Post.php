@@ -367,7 +367,7 @@ class Post extends CI_Controller{
 						break;
 					case '3':
 						// mahasiswa
-						$data['data'] = $this->query_builder->view("SELECT * FROM t_post_hasil as a join t_post as b ON a.post_hasil_soal = b.post_id join t_user as c ON c.user_id = a.post_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.post_hasil_hapus = 0 AND concat(',',b.post_kelas,',') LIKE '%,$kelas,%'");
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_post_hasil as a join t_post as b ON a.post_hasil_soal = b.post_id join t_user as c ON c.user_id = a.post_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.post_hasil_hapus = 0 AND concat(',',b.post_kelas,',') LIKE '%,$kelas,%' AND a.post_hasil_siswa = '$id'");
 							
 						break;
 				}

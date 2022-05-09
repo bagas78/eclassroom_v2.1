@@ -329,7 +329,7 @@ class Formative extends CI_Controller{
 						break;
 					case '3':
 						// mahasiswa
-						$data['data'] = $this->query_builder->view("SELECT * FROM t_formative_hasil as a join t_formative as b ON a.formative_hasil_soal = b.formative_id join t_user as c ON c.user_id = a.formative_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.formative_hasil_hapus = 0 AND concat(',',b.formative_kelas,',') LIKE '%,$kelas,%' GROUP BY a.formative_hasil_siswa");
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_formative_hasil as a join t_formative as b ON a.formative_hasil_soal = b.formative_id join t_user as c ON c.user_id = a.formative_hasil_siswa JOIN t_kelas as d ON c.user_kelas = d.kelas_id WHERE a.formative_hasil_hapus = 0 AND concat(',',b.formative_kelas,',') LIKE '%,$kelas,%' AND a.formative_hasil_siswa = '$id' GROUP BY a.formative_hasil_siswa");
 							
 						break;
 				}
