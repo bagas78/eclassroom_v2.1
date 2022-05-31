@@ -1,0 +1,3 @@
+- Autisme (Sistem Pakar Deteksi Dugaan Retardasi Mental Pada Penyandang Autisme Dengan Metode Certainy Factor (CF))
+- Bedah Rumah (Sistem Pakar kelayakan bedah rumah dengan metode profile matching)
+- bimbel (elearning)

@@ -444,10 +444,6 @@ class Latihan extends CI_Controller{
 				$json = json_decode($db['latihan_hasil_jawaban']);
 				$data['jawaban'] = json_decode(json_encode($json), true);
 
-				// echo '<pre>';
-				// print_r($data['jawaban']);
-				// echo '</pre>';
-
 				$this->load->view('v_template_admin/admin_header',$data);
 				$this->load->view('latihan/koreksi_detail');
 				$this->load->view('v_template_admin/admin_footer');
@@ -477,15 +473,17 @@ class Latihan extends CI_Controller{
 			$sum += $_POST['nilai'.$i];
 
 			//unggah file koreksi
-			$typefile = explode('/', $_FILES['koreksi'.$i]['type']);
-			$filename = $_FILES['koreksi'.$i]['name'];
-			$type = explode(".", $filename);
-			$no = count($type) - 1;
-			$name_file = $soal.'_'.$i.'_koreksi.'.$type[$no];
+			$filename = @$_FILES['koreksi'.$i]['name'];
 
-			move_uploaded_file($_FILES['koreksi'.$i]['tmp_name'], $path.'/'.$name_file);
+			if (@$filename) {
 
-			if ($filename) {
+				$typefile = explode('/', $_FILES['koreksi'.$i]['type']);
+				$type = explode(".", $filename);
+				$no = count($type) - 1;
+				$name_file = $soal.'_'.$i.'_koreksi.'.$type[$no];
+
+				move_uploaded_file($_FILES['koreksi'.$i]['tmp_name'], $path.'/'.$name_file);
+
 				$arr += array('koreksi'.$i.'_file' => $name_file);
 			}
 		}

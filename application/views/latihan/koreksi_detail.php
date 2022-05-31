@@ -66,20 +66,20 @@
 
                     <?php endif ?>
 
-                    <?php if ($this->session->userdata('level') == 2): ?>
-                        
-                      <div class="clearfix"></div><br/>
-
-                      <div class="form-group">
-                        <small>Upload file koreksi</small>
-                        <input style="margin-top: 1%;" type="file" name="koreksi<?php echo $i ?>" class="form-control">
-                      </div>
-                    
-                    <?php endif ?>
-
                   <?php endif ?>
 
-                  <?php if (file_exists('./assets/img/latihan/'.@$nilai['koreksi'.$i.'_file'])): ?>
+                  <?php if ($this->session->userdata('level') == 2): ?>
+                        
+                    <div class="clearfix"></div><br/>
+
+                    <div class="form-group">
+                      <small>Upload file koreksi</small>
+                      <input style="margin-top: 1%;" type="file" name="koreksi<?php echo $i ?>" class="form-control">
+                    </div>
+                  
+                  <?php endif ?>
+
+                  <?php if (@$nilai['koreksi'.$i.'_file'] && file_exists('./assets/img/latihan/'.@$nilai['koreksi'.$i.'_file'])): ?>
                     
                     <?php if ($this->session->userdata('level') == 3): ?>
                       
