@@ -11,7 +11,7 @@ class Latihan extends CI_Controller{
 		$data['block_latihan'] = 'style="display: block;"';
 	  	$data['latihan_active'] = 'class="active"';
 
-		$level = $this->session->userdata('level');
+		$level = $this->session->userdata('level'); 
 		$pelajaran = $this->session->userdata('pelajaran');
 		$kelas = $this->session->userdata('kelas');
 		$tgl = date('Y-m-d');
@@ -53,7 +53,7 @@ class Latihan extends CI_Controller{
 	}
 	function add(){
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_latihan order by latihan_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_latihan order by latihan_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {

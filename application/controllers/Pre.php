@@ -15,7 +15,7 @@ class Pre extends CI_Controller{
 			$pelajaran = $this->session->userdata('pelajaran');
 			$kelas = $this->session->userdata('kelas');
 
-			switch ($level) {  
+			switch ($level) {   
 				case 1: 
 					// admin  
 					$data['data'] = $this->query_builder->view("SELECT * FROM t_pre as a JOIN t_pelajaran as b ON a.pre_pelajaran = b.pelajaran_id WHERE a.pre_hapus = 0");
@@ -57,7 +57,7 @@ class Pre extends CI_Controller{
 
 		$data['title'] = 'pre';
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_pre order by pre_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_pre order by pre_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {

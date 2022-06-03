@@ -50,7 +50,7 @@ class Formative extends CI_Controller{
 
 		$data['title'] = 'formative';
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_formative order by formative_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_formative order by formative_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {

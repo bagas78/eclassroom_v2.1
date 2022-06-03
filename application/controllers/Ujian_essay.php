@@ -52,7 +52,7 @@ class Ujian_essay extends CI_Controller{
 	}
 	function add(){
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_ujian_essay order by ujian_essay_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_ujian_essay order by ujian_essay_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {

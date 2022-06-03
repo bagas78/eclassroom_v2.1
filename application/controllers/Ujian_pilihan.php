@@ -57,7 +57,7 @@ class ujian_pilihan extends CI_Controller{
 
 		$data['title'] = 'ujian_pilihan';
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_ujian_pilihan order by ujian_pilihan_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_ujian_pilihan order by ujian_pilihan_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {

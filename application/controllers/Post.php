@@ -57,7 +57,7 @@ class Post extends CI_Controller{
 
 		$data['title'] = 'post';
 
-		$cek = $this->query_builder->view_row("SELECT * FROM t_post order by post_id DESC limit 1");
+		$cek = $this->query_builder->view_row("SELECT * FROM t_post order by post_key DESC limit 1");
 
 		//generate idsoal
 		if (@$cek == null) {
