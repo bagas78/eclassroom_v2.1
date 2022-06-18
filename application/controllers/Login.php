@@ -32,6 +32,13 @@ class Login extends CI_Controller{
                 
                 case '3':
                   // siswa
+
+                  //get kelompok
+                  $id = $cek['user_id'];
+                  $kelompok = $this->db->query("SELECT * FROM t_kelompok WHERE concat(',',kelompok_siswa,',') LIKE '%,$id,%'")->row_array();
+                  //
+
+                  $this->session->set_userdata('kelompok',@$kelompok['kelompok_id']);
                   $this->session->set_userdata('kelas',$cek['user_kelas']);
                   break;
               }

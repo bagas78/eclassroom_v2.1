@@ -16,7 +16,7 @@ class Latihan extends CI_Controller{
 		$kelas = $this->session->userdata('kelas');
 		$tgl = date('Y-m-d');
 
-		switch ($level) { 
+		switch ($level) {  
 			case 1:  
 				// admin
 				$data['data'] = $this->query_builder->view("SELECT * FROM t_latihan as a JOIN t_pelajaran as b ON a.latihan_pelajaran = b.pelajaran_id JOIN t_kelas as c ON a.latihan_kelas = c.kelas_id WHERE a.latihan_hapus = 0");
@@ -320,6 +320,7 @@ class Latihan extends CI_Controller{
 			$kelas = $this->session->userdata('kelas');
 			$pelajaran = $this->session->userdata('pelajaran');
 			$id = $this->session->userdata('id');
+			$kelompok = $this->session->userdata('kelompok');
 
 			//filter
 			$filter_materi = @$_POST['materi'];
@@ -354,7 +355,7 @@ class Latihan extends CI_Controller{
 
 					case '3':
 						// siswa 
-						$data['data'] = $this->query_builder->view("SELECT * FROM t_latihan_hasil as a join t_latihan as b ON a.latihan_hasil_soal = b.latihan_id join t_user as c ON c.user_id = a.latihan_hasil_siswa LEFT JOIN t_kelompok as e ON a.latihan_hasil_kelompok = e.kelompok_id JOIN t_kelas as f ON c.user_kelas = f.kelas_id WHERE a.latihan_hasil_hapus = 0 AND a.latihan_hasil_siswa = '$id' AND concat(',',b.latihan_kelas,',') LIKE '%,$kelas,%'");
+						$data['data'] = $this->query_builder->view("SELECT * FROM t_latihan_hasil as a join t_latihan as b ON a.latihan_hasil_soal = b.latihan_id join t_user as c ON c.user_id = a.latihan_hasil_siswa LEFT JOIN t_kelompok as e ON a.latihan_hasil_kelompok = e.kelompok_id JOIN t_kelas as f ON c.user_kelas = f.kelas_id WHERE a.latihan_hasil_hapus = 0 AND IF(a.latihan_hasil_jenis = 'individu', a.latihan_hasil_siswa = '$id',a.latihan_hasil_kelompok = '$kelompok') AND concat(',',b.latihan_kelas,',') LIKE '%,$kelas,%'");
 						break;			
 				}
 			}
