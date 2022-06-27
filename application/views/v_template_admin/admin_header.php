@@ -211,7 +211,7 @@
         <li class="treeview <?php echo @$tujuan ?>">
             <a href="#">
               <div class="col-md-1 col-xs-1"><i class="material-icons">assignment_turned_in</i></div> 
-              <div class="col-md-5 col-xs-5"><span>Tujuan Pembelajaran</span></div>
+              <div class="col-md-5 col-xs-5"><span>Tentang Mata Kuliah</span></div>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
